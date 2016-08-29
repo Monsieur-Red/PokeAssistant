@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Poke Assistant</string>
+    <string name="msg_permission_fr">Vous devez activer la permission \"Se superposer aux autres applications\" de Poke Assistant pour qu\'elle puisse fonctionner.\n\nSélectionne l\'application Poke Assistant et autorise la superposition sur autres applications.\n\nEnjoy!</string>
+    <string name="msg_permission_en">You must enable the permission \"Draw over other apps\" for Poke Assistant in order to run.\n\nSelect Poke Assistant Application then permit drawing over other apps.\n\nEnjoy!</string>
+
+    <!-- Service Notification -->
+    <string name="notif_text">Gotta Catch \'Em All!!</string>
+    <string name="quit_app">Click HERE to quit the APP</string>
+
+    <!-- SharedPreferences -->
+    <string name="first_run">first run</string>
+    <string name="sp_key">trainer lvl</string>
+    <string name="sp_default_value">default value</string>
+
+    <!-- IV Calculator -->
+    <string name="trainer_lvl">Trainer\nLVL</string>
+    <string name="pokemon_name">Pokemon name</string>
+    <string name="pokemon_cp">CP</string>
+    <string name="pokemon_hp">HP</string>
+    <string name="pokemon_lvl">Poke Lvl</string>
+
+    <!-- IV Details -->
+    <string name="iv">IV</string>
+    <string name="no_combinations">No combinations found for those entries.</string>
+    <string name="attack">ATT</string>
+    <string name="defense">DEF</string>
+    <string name="stamina">STA</string>
+    <string name="total">TOTAL</string>
+
+    <!-- Move -->
+    <string name="move">Move</string>
+    <string name="name">Name</string>
+    <string name="power">Power</string>
+    <string name="cast_time">Cast time</string>
+    <string name="dps">Dps</string>
+
+</resources>
