@@ -9,4 +9,6 @@ public interface IIVDetailsPresenter {
     void onClick(int viewId);
 
     void update();
+
+    void filterIVs(int stat);
 }

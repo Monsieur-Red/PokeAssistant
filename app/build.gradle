@@ -9,8 +9,8 @@ android {
         applicationId "com.perso.red.pokeassistant"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1"
     }
     buildTypes {
         release {
@@ -22,7 +22,7 @@ android {
     productFlavors {
         prod {
             applicationId = "com.perso.red.pokeassistant"
-            versionName = "1.0-free"
+            versionName = "1.1-free"
         }
     }
 
@@ -37,6 +37,7 @@ ext {
     junitVersion = '4.12'
     appcompatv7Version = '23.4.0'
     designVersion = '23.4.0'
+    materialVersion = '1.2.4'
     percentVersion = '23.4.0'
     fbuttonVersion = '1.0.5'
     moshiVersion = '1.2.0'
@@ -49,6 +50,7 @@ dependencies {
     testCompile "junit:junit:$junitVersion"
     compile "com.android.support:appcompat-v7:$appcompatv7Version"
     compile "com.android.support:design:$designVersion"
+    compile "com.github.rey5137:material:$materialVersion"
     compile "com.android.support:percent:$percentVersion"
     compile "info.hoang8f:fbutton:$fbuttonVersion"
     compile "com.squareup.moshi:moshi:$moshiVersion"

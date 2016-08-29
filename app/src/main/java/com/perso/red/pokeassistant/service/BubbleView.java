@@ -26,11 +26,11 @@ public class BubbleView extends ImageView implements View.OnTouchListener {
 
     private WindowManager.LayoutParams  params;
 
-    private long            startClickTime;
-    private int             initialX;
-    private int             initialY;
-    private float           initialTouchX;
-    private float           initialTouchY;
+    private long    startClickTime;
+    private int     initialX;
+    private int     initialY;
+    private float   initialTouchX;
+    private float   initialTouchY;
 
     public BubbleView(Context context) {
         super(context);

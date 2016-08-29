@@ -22,28 +22,43 @@ public class IVDetailsInteractor {
 
     private IVCalculatorModel   ivCalculatorModel;
     private PokemonJson         pokemonJson;
+    private List<IVResult>      ivResultsFinal;
+
+    private int statChecked;
 
     public IVDetailsInteractor(IVCalculatorModel ivCalculatorModel, AssetManager assetManager) {
         this.ivCalculatorModel = ivCalculatorModel;
         pokemonJson = new PokemonJson(assetManager);
+        ivResultsFinal = new ArrayList<>();
+        statChecked = -1;
     }
 
     public void update(IOnIVDetailsFinishedListener listener) {
-        if (ivCalculatorModel.getPokemonCp() > 0)
-            getIV(listener);
+        List<IVResult>  ivResultsFilter;
+
+        getIV();
+
+        ivResultsFilter = filterIVs(ivResultsFinal);
+        if (ivResultsFilter.size() > 0) {
+            Collections.sort(ivResultsFilter);
+            listener.onSuccessGuessingIV(ivResultsFilter);
+        }
+        else
+            listener.onFailGuessingIV();
     }
 
-    private void getIV(IOnIVDetailsFinishedListener listener) {
+    private void getIV() {
         Pokemon         pokemon = pokemonJson.getPokemons().get(ivCalculatorModel.getPokemonId());
         Stats           stats = pokemon.getStats();
         List<IVResult>  ivResults = new ArrayList<>();
-        List<IVResult>  ivResultsFinal = new ArrayList<>();
         double          cpm = Constants.CpM[Tools.convertLevelToIndex(ivCalculatorModel.getPokemonLvl())];
         float           cp = ivCalculatorModel.getPokemonCp();
         int             attackBase = stats.getAttack();
         int             defenseBase = stats.getDefense();
         int             staminaBase = stats.getStamina();
         List<Integer>   staminaIVS = getStaminaIVs(ivCalculatorModel.getPokemonHp(), staminaBase, cpm);
+
+        ivResultsFinal = new ArrayList<>();
 
         // Get Attack Iv
         for (int ivDefense = 0; ivDefense <= 15; ivDefense++) {
@@ -61,13 +76,6 @@ public class IVDetailsInteractor {
             if (cpResult == cp)
                 ivResultsFinal.add(result);
         }
-
-        if (ivResultsFinal.size() > 0) {
-            Collections.sort(ivResultsFinal);
-            listener.onSuccessGuessingIV(ivResultsFinal);
-        }
-        else
-            listener.onFailGuessingIV();
     }
 
     private List<Integer>   getStaminaIVs(int hp, int staminaBase, double cpm) {
@@ -79,5 +87,42 @@ public class IVDetailsInteractor {
                 staminaIVs.add(i);
         }
         return (staminaIVs);
+    }
+
+    public List<IVResult>  filterIVs(List<IVResult> ivResults) {
+        if (statChecked != -1) {
+            List<IVResult>  ivResultsFilter = new ArrayList<>();
+
+            for (IVResult ivResult : ivResults) {
+                int attack = ivResult.getAttackIV();
+                int defense = ivResult.getDefenseIV();
+                int stamina = ivResult.getStaminaIV();
+
+                switch (statChecked) {
+                    case Constants.STATS_ATTACK:
+                        if (attack > defense && attack > stamina)
+                            ivResultsFilter.add(ivResult);
+                        break;
+                    case Constants.STATS_DEFENSE:
+                        if (defense > attack && defense > stamina)
+                            ivResultsFilter.add(ivResult);
+                        break;
+                    case Constants.STATS_STAMINA:
+                        if (stamina > attack && stamina > defense)
+                            ivResultsFilter.add(ivResult);
+                        break;
+                }
+            }
+            return ivResultsFilter;
+        }
+        return ivResults;
+    }
+
+    public List<IVResult> getIvResultsFinal() {
+        return ivResultsFinal;
+    }
+
+    public void setStatChecked(int statChecked) {
+        this.statChecked = statChecked;
     }
 }

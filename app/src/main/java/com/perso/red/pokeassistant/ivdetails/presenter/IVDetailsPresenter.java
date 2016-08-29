@@ -6,7 +6,7 @@ import com.perso.red.pokeassistant.R;
 import com.perso.red.pokeassistant.models.IVCalculatorModel;
 import com.perso.red.pokeassistant.models.IVResult;
 import com.perso.red.pokeassistant.ivdetails.view.IVDetailsView;
-
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class IVDetailsPresenter implements IIVDetailsPresenter, IOnIVDetailsFini
     private IVDetailsInteractor interactor;
 
     public IVDetailsPresenter(View layout, IVCalculatorModel data) {
-        view = new IVDetailsView(layout);
+        view = new IVDetailsView(layout, this);
         interactor = new IVDetailsInteractor(data, layout.getContext().getAssets());
     }
 
@@ -38,6 +38,22 @@ public class IVDetailsPresenter implements IIVDetailsPresenter, IOnIVDetailsFini
     @Override
     public void update() {
         interactor.update(this);
+    }
+
+    @Override
+    public void filterIVs(int stat) {
+        List<IVResult> ivResults = interactor.getIvResultsFinal();
+
+        interactor.setStatChecked(stat);
+        ivResults = interactor.filterIVs(ivResults);
+
+        if (ivResults.size() > 0) {
+            Collections.sort(ivResults);
+            onSuccessGuessingIV(ivResults);
+        }
+        else
+            onFailGuessingIV();
+
     }
 
     public IVDetailsView getView() {

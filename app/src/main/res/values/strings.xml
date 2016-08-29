@@ -22,6 +22,9 @@
     <!-- IV Details -->
     <string name="iv">IV</string>
     <string name="no_combinations">No combinations found for those entries.</string>
+    <string name="leader_text_fr">Résultat d\'évaluation du chef d\'équipe</string>
+    <string name="leader_text_en">Team Leader result analysis</string>
+
     <string name="attack">ATT</string>
     <string name="defense">DEF</string>
     <string name="stamina">STA</string>

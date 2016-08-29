@@ -321,9 +321,73 @@
                 android:visibility="invisible">
 
                 <TextView
+                    android:id="@+id/text_view_leader_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+
+                    android:gravity="center"
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp"
+                    android:singleLine="false"/>
+
+                <LinearLayout
+                    android:id="@+id/view_iv_details_tab_leader_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.rey.material.widget.CheckBox
+                        android:id="@+id/checkbox_attack"
+                        style="@style/Material.Drawable.CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:gravity="center"
+                        app:cbd_strokeColor="@color/fbutton_color_turquoise"
+                        android:text="@string/attack"
+                        android:textSize="14sp"
+                        android:textColor="@color/primary_text"
+                        android:singleLine="true" />
+
+                    <com.rey.material.widget.CheckBox
+                        android:id="@+id/checkbox_defense"
+                        style="@style/Material.Drawable.CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:gravity="center"
+                        app:cbd_strokeColor="@color/fbutton_color_turquoise"
+                        android:text="@string/defense"
+                        android:textSize="14sp"
+                        android:textColor="@color/primary_text"
+                        android:singleLine="true" />
+
+                    <com.rey.material.widget.CheckBox
+                        android:id="@+id/checkbox_stamina"
+                        style="@style/Material.Drawable.CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:gravity="center"
+                        app:cbd_strokeColor="@color/fbutton_color_turquoise"
+                        android:text="@string/stamina"
+                        android:textSize="14sp"
+                        android:textColor="@color/primary_text"
+                        android:singleLine="true" />
+
+                </LinearLayout>
+
+                <TextView
                     android:id="@+id/text_view_no_combinations"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
 
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -336,9 +400,9 @@
                     android:id="@+id/view_iv_details_tab_iv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:weightSum="3"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/text_view_iv_details_min"
@@ -384,7 +448,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="4"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="0dp"

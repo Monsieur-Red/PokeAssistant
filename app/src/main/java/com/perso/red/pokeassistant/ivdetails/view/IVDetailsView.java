@@ -3,11 +3,14 @@ package com.perso.red.pokeassistant.ivdetails.view;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.perso.red.pokeassistant.R;
+import com.perso.red.pokeassistant.ivdetails.presenter.IVDetailsPresenter;
 import com.perso.red.pokeassistant.models.IVResult;
+import com.perso.red.pokeassistant.utils.Constants;
 
 import java.util.List;
 import java.util.Locale;
@@ -23,23 +26,72 @@ public class IVDetailsView implements IIVDetailsView {
 
     private View            view;
 
-    @BindView(R.id.text_view_no_combinations)   TextView        noCombinations;
-    @BindView(R.id.view_iv_details_tab_iv)      LinearLayout    tabIVs;
-    @BindView(R.id.view_iv_details_tab_titles)  LinearLayout    tabTitles;
-    @BindView(R.id.text_view_iv_details_min)    TextView        minIV;
-    @BindView(R.id.text_view_iv_details_average)TextView        averageIV;
-    @BindView(R.id.text_view_iv_details_max)    TextView        maxIV;
-    @BindView(R.id.recycler_view_iv_details)    RecyclerView    recyclerView;
+    @BindView(R.id.text_view_no_combinations)           TextView        noCombinations;
+    @BindView(R.id.text_view_leader_text)               TextView        leaderText;
+    @BindView(R.id.view_iv_details_tab_leader_result)   LinearLayout    leaderTabResults;
+    @BindView(R.id.checkbox_attack)                     com.rey.material.widget.CheckBox        attackCheckBox;
+    @BindView(R.id.checkbox_defense)                    com.rey.material.widget.CheckBox        defenseCheckBox;
+    @BindView(R.id.checkbox_stamina)                    com.rey.material.widget.CheckBox        staminaCheckBox;
+    @BindView(R.id.view_iv_details_tab_iv)              LinearLayout    tabIVs;
+    @BindView(R.id.view_iv_details_tab_titles)          LinearLayout    tabTitles;
+    @BindView(R.id.text_view_iv_details_min)            TextView        minIV;
+    @BindView(R.id.text_view_iv_details_average)        TextView        averageIV;
+    @BindView(R.id.text_view_iv_details_max)            TextView        maxIV;
+    @BindView(R.id.recycler_view_iv_details)            RecyclerView    recyclerView;
 
     private IVDetailsRVAdapter  adapter;
 
-    public IVDetailsView(View view) {
+    public IVDetailsView(View view, final IVDetailsPresenter presenter) {
         this.view = view;
         ButterKnife.bind(this, view);
 
         adapter = new IVDetailsRVAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+
+        if (Locale.getDefault().getDisplayLanguage().equals(Constants.LANGUAGE_FRENCH))
+            leaderText.setText(view.getContext().getString(R.string.leader_text_fr));
+        else
+            leaderText.setText(view.getContext().getString(R.string.leader_text_en));
+
+        attackCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (attackCheckBox.isChecked()) {
+                    defenseCheckBox.setChecked(false);
+                    staminaCheckBox.setChecked(false);
+                    presenter.filterIVs(Constants.STATS_ATTACK);
+                }
+                else
+                    presenter.filterIVs(-1);
+            }
+        });
+
+        defenseCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (defenseCheckBox.isChecked()) {
+                    attackCheckBox.setChecked(false);
+                    staminaCheckBox.setChecked(false);
+                    presenter.filterIVs(Constants.STATS_DEFENSE);
+                }
+                else
+                    presenter.filterIVs(-1);
+            }
+        });
+
+        staminaCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (staminaCheckBox.isChecked()) {
+                    attackCheckBox.setChecked(false);
+                    defenseCheckBox.setChecked(false);
+                    presenter.filterIVs(Constants.STATS_STAMINA);
+                }
+                else
+                    presenter.filterIVs(-1);
+            }
+        });
     }
 
     @Override
