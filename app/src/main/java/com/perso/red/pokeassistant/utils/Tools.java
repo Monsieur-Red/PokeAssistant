@@ -29,7 +29,7 @@ public class Tools {
     }
 
     public static String loadJSONFromAsset(AssetManager assetManager, String file) {
-        String json;
+        String json = null;
         try {
             InputStream is = assetManager.open(file);
             int size = is.available();
@@ -39,7 +39,6 @@ public class Tools {
             json = new String(buffer, "UTF-8");
         } catch (IOException ex) {
             ex.printStackTrace();
-            return null;
         }
         return json;
     }

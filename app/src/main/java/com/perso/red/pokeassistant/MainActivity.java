@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private void showExplanation() {
         String msg;
 
-        if (Locale.getDefault().getDisplayLanguage().equals(Constants.LANGUAGE_FRENCH))
+        if (Locale.getDefault().getLanguage().equals(Constants.LANGUAGE_FR))
             msg = getString(R.string.msg_permission_fr);
         else
             msg = getString(R.string.msg_permission_en);

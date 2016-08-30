@@ -49,7 +49,7 @@ public class IVDetailsView implements IIVDetailsView {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
 
-        if (Locale.getDefault().getDisplayLanguage().equals(Constants.LANGUAGE_FRENCH))
+        if (Locale.getDefault().getLanguage().equals(Constants.LANGUAGE_FR))
             leaderText.setText(view.getContext().getString(R.string.leader_text_fr));
         else
             leaderText.setText(view.getContext().getString(R.string.leader_text_en));

@@ -18,17 +18,40 @@ import java.util.Locale;
 
 public class PokemonNames {
 
-    private List<String> list;
+    private List    list;
 
     public PokemonNames(AssetManager assetManager) {
         Moshi moshi = new Moshi.Builder().build();
         JsonAdapter<List>  jsonAdapter = moshi.adapter(new TypeToken<List<String>>(){}.getType());
 
         try {
-            if (Locale.getDefault().getDisplayLanguage().equals(Constants.LANGUAGE_FRENCH))
-                list = jsonAdapter.fromJson(Tools.loadJSONFromAsset(assetManager, Constants.FILE_POKEMON_FR));
-            else
-                list = jsonAdapter.fromJson(Tools.loadJSONFromAsset(assetManager, Constants.FILE_POKEMON_EN));
+            String  file;
+
+            switch (Locale.getDefault().getLanguage()) {
+                case Constants.LANGUAGE_FR:
+                    file = Constants.FILE_POKEMON_FR;
+                    break;
+                case Constants.LANGUAGE_EN:
+                    file = Constants.FILE_POKEMON_EN;
+                    break;
+                case Constants.LANGUAGE_DE:
+                    file = Constants.FILE_POKEMON_DE;
+                    break;
+                case Constants.LANGUAGE_JA:
+                    file = Constants.FILE_POKEMON_JA;
+                    break;
+                case Constants.LANGUAGE_RU:
+                    file = Constants.FILE_POKEMON_RU;
+                    break;
+                default:
+                    file = Constants.FILE_POKEMON_EN;
+                    break;
+            }
+
+            String json = Tools.loadJSONFromAsset(assetManager, file);
+            if (json != null)
+                list = jsonAdapter.fromJson(json);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

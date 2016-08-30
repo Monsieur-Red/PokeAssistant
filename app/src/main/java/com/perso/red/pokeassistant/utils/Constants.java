@@ -9,8 +9,18 @@ public class Constants {
     public static final String FILE_POKEMON = "pokemon.json";
     public static final String FILE_POKEMON_EN = "pokemon_en.json";
     public static final String FILE_POKEMON_FR = "pokemon_fr.json";
+    public static final String FILE_POKEMON_DE = "pokemon_de.json";
+    public static final String FILE_POKEMON_JA = "pokemon_ja.json";
+    public static final String FILE_POKEMON_RU = "pokemon_ru.json";
 
-    public static final String LANGUAGE_FRENCH = "français";
+//    public static final String LANGUAGE_FRENCH = "français";
+//    public static final String LANGUAGE_ENGLISH = "english";
+
+    public static final String LANGUAGE_FR = "fr";
+    public static final String LANGUAGE_EN = "en";
+    public static final String LANGUAGE_DE = "de";
+    public static final String LANGUAGE_JA = "ja";
+    public static final String LANGUAGE_RU = "ru";
 
     public static final String POKEMON_TYPE_NORMAL = "NORMAL";
     public static final String POKEMON_TYPE_FIRE = "FIRE";
