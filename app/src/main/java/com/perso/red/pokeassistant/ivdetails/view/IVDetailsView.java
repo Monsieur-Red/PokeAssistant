@@ -3,7 +3,7 @@ package com.perso.red.pokeassistant.ivdetails.view;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +17,8 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 
 /**
  * Created by pierr on 19/08/2016.
@@ -24,11 +26,11 @@ import butterknife.ButterKnife;
 
 public class IVDetailsView implements IIVDetailsView {
 
-    private View            view;
+    private View                view;
+    private IVDetailsPresenter  presenter;
 
     @BindView(R.id.text_view_no_combinations)           TextView        noCombinations;
     @BindView(R.id.text_view_leader_text)               TextView        leaderText;
-    @BindView(R.id.view_iv_details_tab_leader_result)   LinearLayout    leaderTabResults;
     @BindView(R.id.checkbox_attack)                     com.rey.material.widget.CheckBox        attackCheckBox;
     @BindView(R.id.checkbox_defense)                    com.rey.material.widget.CheckBox        defenseCheckBox;
     @BindView(R.id.checkbox_stamina)                    com.rey.material.widget.CheckBox        staminaCheckBox;
@@ -43,6 +45,7 @@ public class IVDetailsView implements IIVDetailsView {
 
     public IVDetailsView(View view, final IVDetailsPresenter presenter) {
         this.view = view;
+        this.presenter = presenter;
         ButterKnife.bind(this, view);
 
         adapter = new IVDetailsRVAdapter();
@@ -53,45 +56,21 @@ public class IVDetailsView implements IIVDetailsView {
             leaderText.setText(view.getContext().getString(R.string.leader_text_fr));
         else
             leaderText.setText(view.getContext().getString(R.string.leader_text_en));
+    }
 
-        attackCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (attackCheckBox.isChecked()) {
-                    defenseCheckBox.setChecked(false);
-                    staminaCheckBox.setChecked(false);
-                    presenter.filterIVs(Constants.STATS_ATTACK);
-                }
-                else
-                    presenter.filterIVs(-1);
-            }
-        });
+    @OnCheckedChanged(R.id.checkbox_attack)
+    public void onAttCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        presenter.onCheckedChanged(buttonView.getId(), isChecked);
+    }
 
-        defenseCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (defenseCheckBox.isChecked()) {
-                    attackCheckBox.setChecked(false);
-                    staminaCheckBox.setChecked(false);
-                    presenter.filterIVs(Constants.STATS_DEFENSE);
-                }
-                else
-                    presenter.filterIVs(-1);
-            }
-        });
+    @OnCheckedChanged(R.id.checkbox_defense)
+    public void onDefCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        presenter.onCheckedChanged(buttonView.getId(), isChecked);
+    }
 
-        staminaCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (staminaCheckBox.isChecked()) {
-                    attackCheckBox.setChecked(false);
-                    defenseCheckBox.setChecked(false);
-                    presenter.filterIVs(Constants.STATS_STAMINA);
-                }
-                else
-                    presenter.filterIVs(-1);
-            }
-        });
+    @OnCheckedChanged(R.id.checkbox_stamina)
+    public void onStaCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        presenter.onCheckedChanged(buttonView.getId(), isChecked);
     }
 
     @Override
@@ -139,5 +118,4 @@ public class IVDetailsView implements IIVDetailsView {
             recyclerView.setVisibility(View.VISIBLE);
         }
     }
-
 }

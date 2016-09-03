@@ -36,15 +36,32 @@ public class IVDetailsPresenter implements IIVDetailsPresenter, IOnIVDetailsFini
     }
 
     @Override
+    public void onCheckedChanged(int viewId, boolean isChecked) {
+        switch (viewId) {
+            case R.id.checkbox_attack:
+                interactor.setAttackCbChecked(isChecked);
+                filterIVs();
+                break;
+            case R.id.checkbox_defense:
+                interactor.setDefenseCbChecked(isChecked);
+                filterIVs();
+                break;
+            case R.id.checkbox_stamina:
+                interactor.setStaminaCbChecked(isChecked);
+                filterIVs();
+                break;
+        }
+    }
+
+    @Override
     public void update() {
         interactor.update(this);
     }
 
     @Override
-    public void filterIVs(int stat) {
+    public void filterIVs() {
         List<IVResult> ivResults = interactor.getIvResultsFinal();
 
-        interactor.setStatChecked(stat);
         ivResults = interactor.filterIVs(ivResults);
 
         if (ivResults.size() > 0) {

@@ -24,13 +24,17 @@ public class IVDetailsInteractor {
     private PokemonJson         pokemonJson;
     private List<IVResult>      ivResultsFinal;
 
-    private int statChecked;
+    private boolean attackCbChecked;
+    private boolean defenseCbChecked;
+    private boolean staminaCbChecked;
 
     public IVDetailsInteractor(IVCalculatorModel ivCalculatorModel, AssetManager assetManager) {
         this.ivCalculatorModel = ivCalculatorModel;
         pokemonJson = new PokemonJson(assetManager);
         ivResultsFinal = new ArrayList<>();
-        statChecked = -1;
+        attackCbChecked = false;
+        defenseCbChecked = false;
+        staminaCbChecked = false;
     }
 
     public void update(IOnIVDetailsFinishedListener listener) {
@@ -90,7 +94,7 @@ public class IVDetailsInteractor {
     }
 
     public List<IVResult>  filterIVs(List<IVResult> ivResults) {
-        if (statChecked != -1) {
+        if (attackCbChecked || defenseCbChecked || staminaCbChecked) {
             List<IVResult>  ivResultsFilter = new ArrayList<>();
 
             for (IVResult ivResult : ivResults) {
@@ -98,20 +102,20 @@ public class IVDetailsInteractor {
                 int defense = ivResult.getDefenseIV();
                 int stamina = ivResult.getStaminaIV();
 
-                switch (statChecked) {
-                    case Constants.STATS_ATTACK:
-                        if (attack > defense && attack > stamina)
-                            ivResultsFilter.add(ivResult);
-                        break;
-                    case Constants.STATS_DEFENSE:
-                        if (defense > attack && defense > stamina)
-                            ivResultsFilter.add(ivResult);
-                        break;
-                    case Constants.STATS_STAMINA:
-                        if (stamina > attack && stamina > defense)
-                            ivResultsFilter.add(ivResult);
-                        break;
-                }
+                if (attackCbChecked && !defenseCbChecked && !staminaCbChecked && attack > defense && attack > stamina)
+                    ivResultsFilter.add(ivResult);
+                else if (defenseCbChecked && !attackCbChecked && !staminaCbChecked && defense > attack && defense > stamina)
+                    ivResultsFilter.add(ivResult);
+                else if (staminaCbChecked && !attackCbChecked && !defenseCbChecked && stamina > attack && stamina > defense)
+                    ivResultsFilter.add(ivResult);
+                else if (attackCbChecked && defenseCbChecked && staminaCbChecked && attack == defense && attack == stamina)
+                    ivResultsFilter.add(ivResult);
+                else if (attackCbChecked && defenseCbChecked && !staminaCbChecked && attack == defense && attack > stamina && defense > stamina)
+                    ivResultsFilter.add(ivResult);
+                else if (attackCbChecked && staminaCbChecked && !defenseCbChecked && attack == stamina && attack > defense && stamina > defense)
+                    ivResultsFilter.add(ivResult);
+                else if (defenseCbChecked && staminaCbChecked && !attackCbChecked && defense == stamina && defense > attack && stamina > attack)
+                    ivResultsFilter.add(ivResult);
             }
             return ivResultsFilter;
         }
@@ -122,7 +126,15 @@ public class IVDetailsInteractor {
         return ivResultsFinal;
     }
 
-    public void setStatChecked(int statChecked) {
-        this.statChecked = statChecked;
+    public void setAttackCbChecked(boolean checked) {
+        attackCbChecked = checked;
+    }
+
+    public void setDefenseCbChecked(boolean checked) {
+        defenseCbChecked = checked;
+    }
+
+    public void setStaminaCbChecked(boolean checked) {
+        staminaCbChecked = checked;
     }
 }

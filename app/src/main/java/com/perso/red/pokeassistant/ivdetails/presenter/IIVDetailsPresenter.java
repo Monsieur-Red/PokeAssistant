@@ -8,7 +8,9 @@ public interface IIVDetailsPresenter {
 
     void onClick(int viewId);
 
+    void onCheckedChanged(int viewId, boolean isChecked);
+
     void update();
 
-    void filterIVs(int stat);
+    void filterIVs();
 }
