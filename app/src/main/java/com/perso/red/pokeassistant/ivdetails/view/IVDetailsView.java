@@ -18,7 +18,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
 
 /**
  * Created by pierr on 19/08/2016.
@@ -92,7 +91,13 @@ public class IVDetailsView implements IIVDetailsView {
     public void updateData(List<IVResult> ivResults) {
         double  minValue = ivResults.get(ivResults.size() - 1).getTotalIV();
         double  maxValue = ivResults.get(0).getTotalIV();
-        double  averageValue = (minValue + maxValue) / 2;
+        double  averageValue = 0;
+
+        for (IVResult ivResult : ivResults) {
+            averageValue += ivResult.getTotalIV();
+        }
+        averageValue /= ivResults.size();
+
         String  min = String.format(Locale.getDefault(), "%.1f",minValue) + "%";
         String  max = String.format(Locale.getDefault(), "%.1f", maxValue) + "%";
         String  average = String.format(Locale.getDefault(), "%.1f", averageValue) + "%";

@@ -2,6 +2,7 @@ package com.perso.red.pokeassistant.ivdetails.presenter;
 
 import android.content.res.AssetManager;
 
+import com.perso.red.pokeassistant.models.DustToLevel;
 import com.perso.red.pokeassistant.models.IVCalculatorModel;
 import com.perso.red.pokeassistant.models.IVResult;
 import com.perso.red.pokeassistant.models.Pokemon;
@@ -22,6 +23,7 @@ public class IVDetailsInteractor {
 
     private IVCalculatorModel   ivCalculatorModel;
     private PokemonJson         pokemonJson;
+    private DustToLevel         dustToLevel;
     private List<IVResult>      ivResultsFinal;
 
     private boolean attackCbChecked;
@@ -31,6 +33,7 @@ public class IVDetailsInteractor {
     public IVDetailsInteractor(IVCalculatorModel ivCalculatorModel, AssetManager assetManager) {
         this.ivCalculatorModel = ivCalculatorModel;
         pokemonJson = new PokemonJson(assetManager);
+        dustToLevel = new DustToLevel(assetManager);
         ivResultsFinal = new ArrayList<>();
         attackCbChecked = false;
         defenseCbChecked = false;
@@ -40,7 +43,10 @@ public class IVDetailsInteractor {
     public void update(IOnIVDetailsFinishedListener listener) {
         List<IVResult>  ivResultsFilter;
 
-        getIV();
+        if (ivCalculatorModel.getCalculatorMode() == Constants.CALCULATOR_MODE_ARC)
+            guessingIVsArcMode();
+        else
+            guessingIVsDustMode();
 
         ivResultsFilter = filterIVs(ivResultsFinal);
         if (ivResultsFilter.size() > 0) {
@@ -51,7 +57,44 @@ public class IVDetailsInteractor {
             listener.onFailGuessingIV();
     }
 
-    private void getIV() {
+    private void guessingIVsDustMode() {
+        Pokemon         pokemon = pokemonJson.getPokemons().get(ivCalculatorModel.getPokemonId());
+        Stats           stats = pokemon.getStats();
+        float           cp = ivCalculatorModel.getPokemonCp();
+        int             attackBase = stats.getAttack();
+        int             defenseBase = stats.getDefense();
+        int             staminaBase = stats.getStamina();
+        List<Double>    pokemonLevels = dustToLevel.getPokemonLvl(ivCalculatorModel.getPokemonDust());
+
+        ivResultsFinal = new ArrayList<>();
+        for (int i = 0; i < pokemonLevels.size(); i++) {
+            if (ivCalculatorModel.isPoweredUp() || (!ivCalculatorModel.isPoweredUp() && i % 2 == 0)) {
+                double pokemonLevel = pokemonLevels.get(i);
+                List<IVResult> ivResults = new ArrayList<>();
+                double cpm = Constants.CpM[Tools.convertLevelToIndex(pokemonLevel)];
+                List<Integer> staminaIVS = getStaminaIVs(ivCalculatorModel.getPokemonHp(), staminaBase, cpm);
+
+                // Get Attack Iv
+                for (int ivDefense = 0; ivDefense <= 15; ivDefense++) {
+                    for (int staminaIV : staminaIVS) {
+                        int ivAttack = (int) Math.ceil(cp / ((Math.pow(defenseBase + ivDefense, 0.5) * Math.pow(staminaBase + staminaIV, 0.5) * Math.pow(cpm, 2) / 10)) - attackBase);
+
+                        if (ivAttack >= 0 && ivAttack <= 15)
+                            ivResults.add(new IVResult(ivAttack, ivDefense, staminaIV));
+                    }
+                }
+
+                for (IVResult result : ivResults) {
+                    int cpResult = (int) ((attackBase + result.getAttackIV()) * ((Math.pow(defenseBase + result.getDefenseIV(), 0.5) * Math.pow(staminaBase + result.getStaminaIV(), 0.5) * Math.pow(cpm, 2) / 10)));
+
+                    if (cpResult == cp)
+                        ivResultsFinal.add(result);
+                }
+            }
+        }
+    }
+
+    private void guessingIVsArcMode() {
         Pokemon         pokemon = pokemonJson.getPokemons().get(ivCalculatorModel.getPokemonId());
         Stats           stats = pokemon.getStats();
         List<IVResult>  ivResults = new ArrayList<>();

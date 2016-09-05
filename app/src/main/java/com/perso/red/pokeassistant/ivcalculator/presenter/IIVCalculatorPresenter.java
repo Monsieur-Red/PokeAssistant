@@ -15,4 +15,12 @@ public interface IIVCalculatorPresenter {
     void setPokemonHP(String hp);
 
     void setPokemonLvl(double lvl);
+
+    void setPokemonDust(String dust);
+
+    void setPokemonPoweredUp(boolean poweredUp);
+
+    void setCalculatorMode(int mode);
+
+    void setVisibility(int visibility);
 }

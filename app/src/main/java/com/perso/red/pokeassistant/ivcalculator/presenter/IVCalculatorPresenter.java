@@ -82,6 +82,35 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
             ivDetailsPresenter.update();
     }
 
+    @Override
+    public void setPokemonDust(String dust) {
+        interactor.setPokemonDust(dust);
+
+        if (view.isInputsFilled())
+            ivDetailsPresenter.update();
+    }
+
+    @Override
+    public void setPokemonPoweredUp(boolean poweredUp) {
+        interactor.setPokemonPoweredUp(poweredUp);
+
+        if (view.isInputsFilled())
+            ivDetailsPresenter.update();
+    }
+
+    @Override
+    public void setCalculatorMode(int mode) {
+        interactor.setCalculatorMode(mode);
+
+        if (view.isInputsFilled())
+            ivDetailsPresenter.update();
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        view.setVisibility(visibility);
+    }
+
     public String getTrainerLvl() {
         return view.getTrainerLvl().getText().toString();
     }

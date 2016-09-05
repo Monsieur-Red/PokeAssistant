@@ -15,16 +15,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.perso.red.pokeassistant.R;
 import com.perso.red.pokeassistant.ivcalculator.presenter.IVCalculatorPresenter;
+import com.perso.red.pokeassistant.utils.Constants;
 import com.perso.red.pokeassistant.utils.Tools;
 
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 
 
 /**
@@ -33,8 +37,9 @@ import butterknife.ButterKnife;
 
 public class IVCalculatorView implements IIVCalculatorView {
 
-    private View            view;
-    private MyArc           myArc;
+    private View                    view;
+    private IVCalculatorPresenter   presenter;
+    private MyArc                   myArc;
 
     @BindView(R.id.edit_text_trainer_lvl)   EditText        trainerLvl;
     @BindView(R.id.text_view_pokemon_name)  TextView        pokemonName;
@@ -46,23 +51,31 @@ public class IVCalculatorView implements IIVCalculatorView {
     @BindView(R.id.btn_plus_drawable)       Button          plusDrawable;
     @BindView(R.id.btn_minus)               Button          minus;
     @BindView(R.id.btn_minus_drawable)      Button          minusDrawable;
+    @BindView(R.id.seekbar)                 SeekBar         seekBar;
+    @BindView(R.id.dust_ui)                 LinearLayout    dustUi;
+    @BindView(R.id.spinner_pokemon_dust)    Spinner         pokemonDust;
+    @BindView(R.id.checkbox_pokemon_powered_up) com.rey.material.widget.CheckBox        poweredUpCb;
+    @BindView(R.id.btn_arc_mode)            Button          arcModeBtn;
+    @BindView(R.id.btn_dust_mode)           Button          dustModeBtn;
 
-    private double          estimatedPokemonLvl;
+    private boolean     arcModeShown;
+    private double      estimatedPokemonLvl;
 
     public IVCalculatorView(View view, WindowManager windowManager, IVCalculatorPresenter presenter) {
         this.view = view;
+        this.presenter = presenter;
         ButterKnife.bind(this, view);
+        arcModeShown = true;
 
         initTrainerLvl(presenter);
         initPokemonName(presenter);
         initCP(presenter);
         initHP(presenter);
         initPokemonLvl(presenter, windowManager);
+        initDustUI(view.getContext());
     }
 
     private void initTrainerLvl(final IVCalculatorPresenter presenter) {
-        final SeekBar   seekBar = (SeekBar) view.findViewById(R.id.seekbar);
-
         trainerLvl.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,13 +114,20 @@ public class IVCalculatorView implements IIVCalculatorView {
     private void initPokemonName(final IVCalculatorPresenter presenter) {
         final EditText    search = ButterKnife.findById(pokemonsNames, R.id.edit_text_search);
         ListView    listView = ButterKnife.findById(pokemonsNames, R.id.list_view_pokemons_names);
-        final ArrayAdapter adapter = new ArrayAdapter<String>(listView.getContext(), R.layout.view_pokemons_names_rv_row, R.id.name, presenter.getPokemonNames());
+        final ArrayAdapter adapter = new ArrayAdapter<>(listView.getContext(), R.layout.view_pokemons_names_rv_row, R.id.name, presenter.getPokemonNames());
 
         pokemonName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pokemonsNames.setVisibility(View.VISIBLE);
-                setPokemonLvlVisibility(View.INVISIBLE);
+
+                if (arcModeShown)
+                    setArcModeVisibility(View.INVISIBLE);
+                else
+                    setDustModeVisibility(View.INVISIBLE);
+
+                arcModeBtn.setVisibility(View.INVISIBLE);
+                dustModeBtn.setVisibility(View.INVISIBLE);
                 pokemonsNames.bringToFront();
                 search.requestFocus();
             }
@@ -146,7 +166,14 @@ public class IVCalculatorView implements IIVCalculatorView {
                 adapter.getFilter().filter("");
                 ((InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
                 presenter.setPokemonName((String) adapter.getItem(position));
-                setPokemonLvlVisibility(View.VISIBLE);
+
+                if (arcModeShown)
+                    setArcModeVisibility(View.VISIBLE);
+                else
+                    setDustModeVisibility(View.VISIBLE);
+
+                arcModeBtn.setVisibility(View.VISIBLE);
+                dustModeBtn.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -216,7 +243,6 @@ public class IVCalculatorView implements IIVCalculatorView {
     }
 
     private void initPokemonLvl(final IVCalculatorPresenter presenter, WindowManager windowManager) {
-        final SeekBar seekBar = ButterKnife.findById(view, R.id.seekbar);
         myArc = new MyArc(view.getContext(), windowManager);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -273,14 +299,42 @@ public class IVCalculatorView implements IIVCalculatorView {
         });
     }
 
-    private void setPokemonLvlVisibility(int visibility) {
+    private void initDustUI(Context context) {
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(context, R.array.dust_array, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        pokemonDust.setAdapter(adapter);
+
+        pokemonDust.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+              @Override
+              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                  presenter.setPokemonDust((String) parent.getAdapter().getItem(position));
+              }
+
+              @Override
+              public void onNothingSelected(AdapterView<?> parent) {
+
+              }
+      });
+
+        if (Locale.getDefault().getLanguage().equals(Constants.LANGUAGE_FR))
+            poweredUpCb.setText(context.getString(R.string.powered_up_fr));
+        else
+            poweredUpCb.setText(context.getString(R.string.powered_up_en));
+    }
+
+    private void setArcModeVisibility(int visibility) {
         pokemonLvl.setVisibility(visibility);
         plus.setVisibility(visibility);
         plusDrawable.setVisibility(visibility);
         minus.setVisibility(visibility);
         minusDrawable.setVisibility(visibility);
+        myArc.getMyArcPointer().getPointerView().setVisibility(visibility);
+        seekBar.setVisibility(visibility);
     }
 
+    private void setDustModeVisibility(int visibility) {
+        dustUi.setVisibility(visibility);
+    }
 
     @Override
     public void hidePokemonsNames(String name) {
@@ -291,6 +345,35 @@ public class IVCalculatorView implements IIVCalculatorView {
     @Override
     public boolean isInputsFilled() {
         return !TextUtils.isEmpty(trainerLvl.getText()) && !TextUtils.isEmpty(pokemonName.getText()) && !TextUtils.isEmpty(pokemonCP.getText()) && !TextUtils.isEmpty(pokemonHP.getText()) && !TextUtils.isEmpty(pokemonLvl.getText());
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        if (arcModeShown)
+            setArcModeVisibility(visibility);
+        else
+            setDustModeVisibility(visibility);
+    }
+
+    @OnCheckedChanged (R.id.checkbox_pokemon_powered_up)
+    public void setPokemonPoweredUp(boolean isChecked) {
+        presenter.setPokemonPoweredUp(isChecked);
+    }
+
+    @OnClick (R.id.btn_arc_mode)
+    public void setArcMode() {
+        arcModeShown = true;
+        setDustModeVisibility(View.GONE);
+        setArcModeVisibility(View.VISIBLE);
+        presenter.setCalculatorMode(Constants.CALCULATOR_MODE_ARC);
+    }
+
+    @OnClick (R.id.btn_dust_mode)
+    public void setDustMode() {
+        arcModeShown = false;
+        setArcModeVisibility(View.GONE);
+        setDustModeVisibility(View.VISIBLE);
+        presenter.setCalculatorMode(Constants.CALCULATOR_MODE_DUST);
     }
 
     public ImageView getMyArcPointer() {

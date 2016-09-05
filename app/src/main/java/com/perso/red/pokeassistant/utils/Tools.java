@@ -44,7 +44,7 @@ public class Tools {
     }
 
     public static int convertLevelToIndex(double pokemonLevel){
-        return (int)(pokemonLevel * 2 -2);
+        return (int)(pokemonLevel * 2 - 2);
     }
 
     public static double roundEstimatedLvl(double estimatedPokemonLvl){

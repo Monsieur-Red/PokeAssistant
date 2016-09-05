@@ -18,6 +18,33 @@
     <string name="pokemon_cp">CP</string>
     <string name="pokemon_hp">HP</string>
     <string name="pokemon_lvl">Poke Lvl</string>
+    <string name="arc_mode">Arc mode</string>
+    <string name="dust_mode">Dust mode</string>
+    <string name="stardust">Stardust</string>
+    <string-array name="dust_array">
+        <item>200</item>
+        <item>400</item>
+        <item>600</item>
+        <item>800</item>
+        <item>1000</item>
+        <item>1300</item>
+        <item>1600</item>
+        <item>1900</item>
+        <item>2200</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3500</item>
+        <item>4000</item>
+        <item>4500</item>
+        <item>5000</item>
+        <item>6000</item>
+        <item>7000</item>
+        <item>8000</item>
+        <item>9000</item>
+        <item>10000</item>
+    </string-array>
+    <string name="powered_up_en">Powered up?</string>
+    <string name="powered_up_fr">Recharger?</string>
 
     <!-- IV Details -->
     <string name="iv">IV</string>

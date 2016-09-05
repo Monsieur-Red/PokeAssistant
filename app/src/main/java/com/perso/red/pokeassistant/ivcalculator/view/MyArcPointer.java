@@ -2,13 +2,9 @@ package com.perso.red.pokeassistant.ivcalculator.view;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
-import android.graphics.Rect;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -25,7 +21,6 @@ public class MyArcPointer {
     private MyArc           myArc;
 
     private ImageView       arcPointer;
-    private DisplayMetrics  displayMetrics;
 
     private final WindowManager.LayoutParams arcParams = new WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -45,19 +40,17 @@ public class MyArcPointer {
     }
 
     private void createArcPointer(Context context) {
-        displayMetrics = context.getResources().getDisplayMetrics();
-
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0)
             statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
 
         arcParams.gravity = Gravity.TOP | Gravity.START;
         arcPointer = new ImageView(context);
-        arcPointer.setImageResource(R.drawable.arc_pointer);
+        arcPointer.setImageResource(R.drawable.apptheme_scrubber_control_pressed_holo);
         arcPointer.setVisibility(View.GONE);
 
-        pointerHeight = ContextCompat.getDrawable(context, R.drawable.arc_pointer).getIntrinsicHeight() / 2;
-        pointerWidth = ContextCompat.getDrawable(context, R.drawable.arc_pointer).getIntrinsicWidth() / 2;
+        pointerHeight = ContextCompat.getDrawable(context, R.drawable.apptheme_scrubber_control_pressed_holo).getIntrinsicHeight() / 2;
+        pointerWidth = ContextCompat.getDrawable(context, R.drawable.apptheme_scrubber_control_pressed_holo).getIntrinsicWidth() / 2;
 
         windowManager.addView(arcPointer, arcParams);
     }

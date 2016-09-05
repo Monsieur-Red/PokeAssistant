@@ -9,4 +9,6 @@ public interface IIVCalculatorView {
     void hidePokemonsNames(String name);
 
     boolean isInputsFilled();
+
+    void setVisibility(int visibility);
 }

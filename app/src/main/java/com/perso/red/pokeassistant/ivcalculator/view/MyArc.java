@@ -1,11 +1,11 @@
 package com.perso.red.pokeassistant.ivcalculator.view;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.perso.red.pokeassistant.utils.Constants;
-import com.perso.red.pokeassistant.utils.Tools;
 
 /**
  * Created by pierr on 25/08/2016.
@@ -14,54 +14,50 @@ import com.perso.red.pokeassistant.utils.Tools;
 public class MyArc {
 
     private MyArcPointer    myArcPointer;
-    private DisplayMetrics  displayMetrics;
 
     private int[] arcX;
     private int[] arcY;
 
-    private int arcCenter;
-    private int arcInitialY;
-    private int radius;
+    private Point   arcInit;
+    private int     arcRadius;
 
     public MyArc(Context context, WindowManager windowManager) {
         myArcPointer = new MyArcPointer(context, windowManager, this);
-        displayMetrics = context.getResources().getDisplayMetrics();
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
 
-        // TODO same calculation as in pokefly @line 193 with difference of "- pointerHeight - statusBarHeight" this should be outsource in a method
-        arcCenter = (int) ((displayMetrics.widthPixels * 0.5));
-        arcInitialY = (int) Math.floor(displayMetrics.heightPixels / 2.803943); // - pointerHeight - statusBarHeight; // 913 - pointerHeight - statusBarHeight; //(int)Math.round(displayMetrics.heightPixels / 6.0952381) * -1; //dpToPx(113) * -1; //(int)Math.round(displayMetrics.heightPixels / 6.0952381) * -1; //-420;
-        if (displayMetrics.heightPixels == 2392 || displayMetrics.heightPixels == 800) {
-            arcInitialY--;
-        } else if (displayMetrics.heightPixels == 1920) {
-            arcInitialY++;
-        }
+        arcInit = new Point();
 
-        // TODO same calculation as in pokefly @line 201
-        radius = (int) Math.round(displayMetrics.heightPixels / 4.3760683); //dpToPx(157); //(int)Math.round(displayMetrics.heightPixels / 4.37606838); //(int)Math.round(displayMetrics.widthPixels / 2.46153846); //585;
-        if (displayMetrics.heightPixels == 1776 || displayMetrics.heightPixels == 960 || displayMetrics.heightPixels == 800) {
-            radius++;
-        }
+        arcInit.x = (int) ((displayMetrics.widthPixels * 0.5));
+        arcInit.y = (int) Math.floor(displayMetrics.heightPixels / 2.803943);
+        if (displayMetrics.heightPixels == 2392 || displayMetrics.heightPixels == 800)
+            arcInit.y--;
+        else if (displayMetrics.heightPixels == 1920)
+            arcInit.y++;
+
+        arcRadius = (int) Math.round(displayMetrics.heightPixels / 4.3760683);
+        if (displayMetrics.heightPixels == 1776 || displayMetrics.heightPixels == 960 || displayMetrics.heightPixels == 800)
+            arcRadius++;
 
         setupArcPoints(1);
         myArcPointer.setArcPointer(1);
     }
 
     public void setupArcPoints(int trainerLevel) {
-        final int indices = Math.min((int)((trainerLevel + 1.5) * 2) - 1,79);
-        arcX = new int[indices];
-        arcY = new int[indices];
+        final int maxPokeLevelIdx = Math.min(2 * trainerLevel + 1, 78);
+        arcX = new int[maxPokeLevelIdx + 1];
+        arcY = new int[maxPokeLevelIdx + 1];
 
-        double maxAngle = 178.4;
-        double levelCoeff = maxAngle * Constants.CpM[trainerLevel * 2 - 2] / ( Constants.CpM[(int) ( (trainerLevel + 1.5)* 2 - 2 )] - Constants.CpM[0] );
+        double baseCpM = Constants.CpM[0];
+        double maxPokeCpMDelta = Constants.CpM[Math.min(maxPokeLevelIdx + 1, Constants.CpM.length - 1)] - baseCpM;
 
-        for (double pokeLevel = 1.0; pokeLevel <= trainerLevel + 1.5; pokeLevel += 0.5) {
-            double angleInDegrees = (Constants.CpM[(int) (pokeLevel * 2 - 2)] - Constants.CpM[0]) * levelCoeff / Constants.CpM[trainerLevel * 2 - 2];
+        //pokeLevelIdx <= maxPokeLevelIdx ensures we never overflow CpM/arc/arcY.
+        for (int pokeLevelIdx = 0; pokeLevelIdx <= maxPokeLevelIdx; pokeLevelIdx++) {
+            double pokeCurrCpMDelta = Constants.CpM[pokeLevelIdx] - baseCpM;
+            double arcRatio = pokeCurrCpMDelta / maxPokeCpMDelta;
+            double angleInRadians = (arcRatio + 1) * Math.PI;
 
-            double angleInRadians = (angleInDegrees + 180) * Math.PI / 180.0;
-
-            int index = Tools.convertLevelToIndex(pokeLevel);
-            arcX[index] = (int) (arcCenter + (radius * Math.cos(angleInRadians)));
-            arcY[index] = (int) (arcInitialY + (radius * Math.sin(angleInRadians)));
+            arcX[pokeLevelIdx] = (int) (arcInit.x + (arcRadius * Math.cos(angleInRadians)));
+            arcY[pokeLevelIdx] = (int) (arcInit.y + (arcRadius * Math.sin(angleInRadians)));
         }
     }
 

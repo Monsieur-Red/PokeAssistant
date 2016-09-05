@@ -43,6 +43,18 @@ public class IVCalculatorInteractor {
         ivCalculatorModel.setPokemonLvl(lvl);
     }
 
+    public void setPokemonDust(String dust) {
+        ivCalculatorModel.setPokemonDust(dust);
+    }
+
+    public void setPokemonPoweredUp(boolean poweredUp) {
+        ivCalculatorModel.setPoweredUp(poweredUp);
+    }
+
+    public void setCalculatorMode(int mode) {
+        ivCalculatorModel.setCalculatorMode(mode);
+    }
+
     public List<String> getPokemonNames() {
         return pokemonNames.getlist();
     }

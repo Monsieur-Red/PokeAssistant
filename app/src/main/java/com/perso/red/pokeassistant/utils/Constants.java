@@ -12,6 +12,7 @@ public class Constants {
     public static final String FILE_POKEMON_DE = "pokemon_de.json";
     public static final String FILE_POKEMON_JA = "pokemon_ja.json";
     public static final String FILE_POKEMON_RU = "pokemon_ru.json";
+    public static final String FILE_DUST_TO_LVL = "dust_to_level.json";
 
     public static final String LANGUAGE_FR = "fr";
     public static final String LANGUAGE_EN = "en";
@@ -47,8 +48,7 @@ public class Constants {
             , 0.752729099732281, 0.75568550825119, 0.758630370209851, 0.761563837528229, 0.76448604959218, 0.767397165298462, 0.770297293677362, 0.773186504840851, 0.776064947064992, 0.778932750225067, 0.781790050767666
             , 0.784636974334717, 0.787473608513275, 0.790300011634827};
 
-    public static final int STATS_ATTACK = 0;
-    public static final int STATS_DEFENSE = 1;
-    public static final int STATS_STAMINA = 2;
+    public static final int CALCULATOR_MODE_ARC = 0;
+    public static final int CALCULATOR_MODE_DUST = 1;
 
 }

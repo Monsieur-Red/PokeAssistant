@@ -1,5 +1,7 @@
 package com.perso.red.pokeassistant.models;
 
+import com.perso.red.pokeassistant.utils.Constants;
+
 /**
  * Created by pierr on 22/08/2016.
  */
@@ -12,6 +14,15 @@ public class IVCalculatorModel {
     private int     pokemonCp;
     private int     pokemonHp;
     private double  pokemonLvl;
+    private String  pokemonDust;
+    private boolean poweredUp;
+    private int     calculatorMode;
+
+    public IVCalculatorModel() {
+        calculatorMode = Constants.CALCULATOR_MODE_ARC;
+        pokemonDust = "200";
+        poweredUp = false;
+    }
 
     public int getTrainerLvl() {
         return trainerLvl;
@@ -59,5 +70,29 @@ public class IVCalculatorModel {
 
     public void setPokemonLvl(double pokemonLvl) {
         this.pokemonLvl = pokemonLvl;
+    }
+
+    public String getPokemonDust() {
+        return pokemonDust;
+    }
+
+    public void setPokemonDust(String pokemonDust) {
+        this.pokemonDust = pokemonDust;
+    }
+
+    public boolean isPoweredUp() {
+        return poweredUp;
+    }
+
+    public void setPoweredUp(boolean poweredUp) {
+        this.poweredUp = poweredUp;
+    }
+
+    public int getCalculatorMode() {
+        return calculatorMode;
+    }
+
+    public void setCalculatorMode(int calculatorMode) {
+        this.calculatorMode = calculatorMode;
     }
 }

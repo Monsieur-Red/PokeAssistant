@@ -60,7 +60,7 @@ public class MainUiView extends RelativeLayout implements View.OnClickListener {
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
         if (ivCalculatorPresenter != null)
-            ivCalculatorPresenter.getMyArcPointer().setVisibility(visibility);
+            ivCalculatorPresenter.setVisibility(visibility);
     }
 
     @Override
