@@ -22,5 +22,11 @@ public interface IIVCalculatorPresenter {
 
     void setCalculatorMode(int mode);
 
+    void showIvDetails();
+
+    void showMoves();
+
     void setVisibility(int visibility);
+
+    void showMenu();
 }

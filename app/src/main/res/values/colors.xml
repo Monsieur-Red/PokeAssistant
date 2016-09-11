@@ -14,6 +14,10 @@
     <color name="min">#ff6e6e</color>
     <color name="average">#B6B6B6</color>
 
+    <color name="instinct">#CBC118</color>
+    <color name="mystic">#00406D</color>
+    <color name="valor">#6D1600</color>
+
     <color name="fbutton_color_turquoise">#1abc9c</color>
     <color name="fbutton_color_green_sea">#16a085</color>
     <color name="fbutton_color_sun_flower">#f1c40f</color>

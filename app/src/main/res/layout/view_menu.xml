@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_transparent">
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="18%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textAllCaps="false"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="0dp" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_eggs"
+        android:layout_below="@+id/btn_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="32%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/eggs"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textAllCaps="false"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="0dp" />
+
+
+    <!--<info.hoang8f.widget.FButton-->
+        <!--android:id="@+id/btn_pokemon"-->
+        <!--android:layout_below="@+id/btn_back"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_heightPercent="10%"-->
+        <!--app:layout_widthPercent="30%"-->
+        <!--app:layout_marginRightPercent="4%"-->
+
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:text="@string/pokedex"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:singleLine="true"-->
+        <!--android:textAllCaps="false"-->
+
+        <!--fbutton:buttonColor="@color/fbutton_color_turquoise"-->
+        <!--fbutton:shadowColor="@color/fbutton_color_green_sea"-->
+        <!--fbutton:shadowEnabled="true"-->
+        <!--fbutton:shadowHeight="5dp"-->
+        <!--fbutton:cornerRadius="0dp" />-->
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_iv_calculator"
+        android:layout_below="@+id/btn_eggs"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="46%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/iv_calculator"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textAllCaps="false"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="0dp" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_experience_calculator"
+        android:layout_below="@+id/btn_iv_calculator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="60%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/experience_calculator"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textAllCaps="false"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="0dp" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_evolution_calculator"
+        android:layout_below="@+id/btn_experience_calculator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="74%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/evolution_calculator"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textAllCaps="false"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="0dp" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_appraisal"
+        android:layout_below="@+id/btn_evolution_calculator"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="88%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/appraisal_guide"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textAllCaps="false"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="0dp" />
+
+</android.support.percent.PercentRelativeLayout>

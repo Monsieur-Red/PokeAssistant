@@ -13,6 +13,10 @@ public class Constants {
     public static final String FILE_POKEMON_JA = "pokemon_ja.json";
     public static final String FILE_POKEMON_RU = "pokemon_ru.json";
     public static final String FILE_DUST_TO_LVL = "dust_to_level.json";
+    public static final String FILE_CPM_POKEMON = "pokemon_cpm.json";
+    public static final String FILE_MAX_CP_POKEMON = "pokemon_max_cp.json";
+    public static final String FILE_EGG_G1 = "eggs_g1.png";
+    public static final String FILE_EGG_G2 = "eggs_g2.jpg";
 
     public static final String LANGUAGE_FR = "fr";
     public static final String LANGUAGE_EN = "en";
@@ -50,5 +54,14 @@ public class Constants {
 
     public static final int CALCULATOR_MODE_ARC = 0;
     public static final int CALCULATOR_MODE_DUST = 1;
+
+    public static final int VIEW_NONE = -1;
+    public static final int VIEW_MENU = 0;
+    public static final int VIEW_POKEMON = 1;
+    public static final int VIEW_EGGS = 2;
+    public static final int VIEW_IV_CALC = 3;
+    public static final int VIEW_EVO_CALC = 4;
+    public static final int VIEW_XP_CALC = 5;
+    public static final int VIEW_APPRAISAL = 6;
 
 }

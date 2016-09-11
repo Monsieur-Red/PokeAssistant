@@ -3,6 +3,7 @@ package com.perso.red.pokeassistant.ivdetails.view;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,10 +30,9 @@ public class IVDetailsView implements IIVDetailsView {
     private IVDetailsPresenter  presenter;
 
     @BindView(R.id.text_view_no_combinations)           TextView        noCombinations;
-    @BindView(R.id.text_view_leader_text)               TextView        leaderText;
-    @BindView(R.id.checkbox_attack)                     com.rey.material.widget.CheckBox        attackCheckBox;
-    @BindView(R.id.checkbox_defense)                    com.rey.material.widget.CheckBox        defenseCheckBox;
-    @BindView(R.id.checkbox_stamina)                    com.rey.material.widget.CheckBox        staminaCheckBox;
+    @BindView(R.id.checkbox_attack)                     CheckBox        attackCheckBox;
+    @BindView(R.id.checkbox_defense)                    CheckBox        defenseCheckBox;
+    @BindView(R.id.checkbox_stamina)                    CheckBox        staminaCheckBox;
     @BindView(R.id.view_iv_details_tab_iv)              LinearLayout    tabIVs;
     @BindView(R.id.view_iv_details_tab_titles)          LinearLayout    tabTitles;
     @BindView(R.id.text_view_iv_details_min)            TextView        minIV;
@@ -50,11 +50,6 @@ public class IVDetailsView implements IIVDetailsView {
         adapter = new IVDetailsRVAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
-
-        if (Locale.getDefault().getLanguage().equals(Constants.LANGUAGE_FR))
-            leaderText.setText(view.getContext().getString(R.string.leader_text_fr));
-        else
-            leaderText.setText(view.getContext().getString(R.string.leader_text_en));
     }
 
     @OnCheckedChanged(R.id.checkbox_attack)

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/pokemon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:layout_gravity="center"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/cp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:layout_gravity="center"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:id="@+id/max_cp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:layout_gravity="center"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp"
+        android:singleLine="true" />
+
+    <ImageButton
+        android:id="@+id/btn_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+
+        android:layout_gravity="center"
+        android:src="@drawable/ic_delete_red_900_36dp"
+        android:scaleType="centerInside"
+        android:background="@android:color/transparent" />
+
+</LinearLayout>

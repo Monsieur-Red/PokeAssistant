@@ -54,16 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     @TargetApi(23)
     private void showExplanation() {
-        String msg;
-
-        if (Locale.getDefault().getLanguage().equals(Constants.LANGUAGE_FR))
-            msg = getString(R.string.msg_permission_fr);
-        else
-            msg = getString(R.string.msg_permission_en);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("")
-                .setMessage(msg)
+                .setMessage(R.string.msg_permission)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);

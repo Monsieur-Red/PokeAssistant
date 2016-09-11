@@ -5,10 +5,15 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 
 import com.perso.red.pokeassistant.R;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -41,6 +46,14 @@ public class Tools {
             ex.printStackTrace();
         }
         return json;
+    }
+
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager    assets = context.getResources().getAssets();
+        InputStream     buffer = new BufferedInputStream((assets.open(filename)));
+        Bitmap          bitmap = BitmapFactory.decodeStream(buffer);
+
+        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
     public static int convertLevelToIndex(double pokemonLevel){

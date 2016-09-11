@@ -16,8 +16,8 @@ public class IVCalculatorInteractor {
     private IVCalculatorModel   ivCalculatorModel;
     private PokemonNames        pokemonNames;
 
-    public IVCalculatorInteractor(IVCalculatorModel ivCalculatorModel, AssetManager assetManager) {
-        this.ivCalculatorModel = ivCalculatorModel;
+    public IVCalculatorInteractor(AssetManager assetManager) {
+        ivCalculatorModel = new IVCalculatorModel();
         pokemonNames = new PokemonNames(assetManager);
     }
 
@@ -57,5 +57,9 @@ public class IVCalculatorInteractor {
 
     public List<String> getPokemonNames() {
         return pokemonNames.getlist();
+    }
+
+    public IVCalculatorModel getIvCalculatorModel() {
+        return ivCalculatorModel;
     }
 }

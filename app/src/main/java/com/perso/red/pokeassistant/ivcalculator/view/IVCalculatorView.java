@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
-
 /**
  * Created by pierr on 17/08/2016.
  */
@@ -54,7 +53,6 @@ public class IVCalculatorView implements IIVCalculatorView {
     @BindView(R.id.seekbar)                 SeekBar         seekBar;
     @BindView(R.id.dust_ui)                 LinearLayout    dustUi;
     @BindView(R.id.spinner_pokemon_dust)    Spinner         pokemonDust;
-    @BindView(R.id.checkbox_pokemon_powered_up) com.rey.material.widget.CheckBox        poweredUpCb;
     @BindView(R.id.btn_arc_mode)            Button          arcModeBtn;
     @BindView(R.id.btn_dust_mode)           Button          dustModeBtn;
 
@@ -94,7 +92,6 @@ public class IVCalculatorView implements IIVCalculatorView {
 
                     if (trainerLvlInt >= 1 && trainerLvlInt <= 40) {
                         myArc.setupArcPoints(trainerLvlInt);
-                        seekBar.setProgress(1);
                         seekBar.setProgress(0);
                         seekBar.setMax(Math.min(trainerLvlInt * 2 + 1, 79));
                         presenter.setTrainerLvl(s.toString());
@@ -112,9 +109,9 @@ public class IVCalculatorView implements IIVCalculatorView {
     }
 
     private void initPokemonName(final IVCalculatorPresenter presenter) {
-        final EditText    search = ButterKnife.findById(pokemonsNames, R.id.edit_text_search);
-        ListView    listView = ButterKnife.findById(pokemonsNames, R.id.list_view_pokemons_names);
-        final ArrayAdapter adapter = new ArrayAdapter<>(listView.getContext(), R.layout.view_pokemons_names_rv_row, R.id.name, presenter.getPokemonNames());
+        final EditText      search = ButterKnife.findById(pokemonsNames, R.id.edit_text_search);
+        final ListView      listView = ButterKnife.findById(pokemonsNames, R.id.list_view_pokemons_names);
+        final ArrayAdapter  adapter = new ArrayAdapter<>(listView.getContext(), R.layout.view_pokemons_names_rv_row, R.id.name, presenter.getPokemonNames());
 
         pokemonName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,12 +257,11 @@ public class IVCalculatorView implements IIVCalculatorView {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                ((InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                ((InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
 
         });
@@ -315,11 +311,6 @@ public class IVCalculatorView implements IIVCalculatorView {
 
               }
       });
-
-        if (Locale.getDefault().getLanguage().equals(Constants.LANGUAGE_FR))
-            poweredUpCb.setText(context.getString(R.string.powered_up_fr));
-        else
-            poweredUpCb.setText(context.getString(R.string.powered_up_en));
     }
 
     private void setArcModeVisibility(int visibility) {
@@ -358,6 +349,21 @@ public class IVCalculatorView implements IIVCalculatorView {
     @OnCheckedChanged (R.id.checkbox_pokemon_powered_up)
     public void setPokemonPoweredUp(boolean isChecked) {
         presenter.setPokemonPoweredUp(isChecked);
+    }
+
+    @OnClick(R.id.btn_menu)
+    public void OnClickMenu() {
+        presenter.showMenu();
+    }
+
+    @OnClick(R.id.btn_iv_details)
+    public void OnClickIvDetails() {
+        presenter.showIvDetails();
+    }
+
+    @OnClick(R.id.btn_moves)
+    public void OnClickMoves() {
+        presenter.showMoves();
     }
 
     @OnClick (R.id.btn_arc_mode)

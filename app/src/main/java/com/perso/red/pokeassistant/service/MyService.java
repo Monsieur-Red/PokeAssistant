@@ -1,28 +1,31 @@
 package com.perso.red.pokeassistant.service;
 
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.IBinder;
-import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.perso.red.pokeassistant.R;
+import com.perso.red.pokeassistant.mainUi.MainUiView;
 import com.perso.red.pokeassistant.utils.Tools;
+
+import jp.co.recruit_lifestyle.android.floatingview.FloatingViewListener;
+import jp.co.recruit_lifestyle.android.floatingview.FloatingViewManager;
 
 /**
  * Created by pierr on 18/08/2016.
  */
 
-public class MyService extends Service {
+public class MyService extends Service implements FloatingViewListener {
 
-    private WindowManager   windowManager;
-    private BubbleView      bubbleView;
-    private MainUiView      mainUiView;
+    private WindowManager       windowManager;
+    private MainUiView          mainUiView;
+    private FloatingViewManager mFloatingViewManager;
 
     @Override public IBinder onBind(Intent intent) {
         return null;
@@ -30,54 +33,57 @@ public class MyService extends Service {
 
     @Override public void onCreate() {
         super.onCreate();
-
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-
-        mainUiView = new MainUiView(this);
-        mainUiView.init(windowManager);
-
-        bubbleView = new BubbleView(this);
-        bubbleView.init(windowManager, mainUiView);
-
-        setupServiceNotificationBar();
+        mainUiView = new MainUiView(this, windowManager);
     }
 
-    protected BroadcastReceiver stopServiceReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String  trainerLvl = mainUiView.getTrainerLvl();
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (mFloatingViewManager != null)
+            return START_STICKY;
 
-            if (!TextUtils.isEmpty(trainerLvl))
-                Tools.saveTrainerLevel(context, trainerLvl);
+        final DisplayMetrics metrics = new DisplayMetrics();
+        final WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
+        final ImageView bubbleView = new ImageView(this);
+        bubbleView.setImageResource(R.drawable.icon);
 
-            unregisterReceiver(stopServiceReceiver);
-            stopSelf();
-        }
-    };
+        bubbleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainUiView.setVisibility();
+            }
+        });
 
-    private void setupServiceNotificationBar(){
-        registerReceiver(stopServiceReceiver, new IntentFilter("myFilter"));
-        PendingIntent contentIntent = PendingIntent.getBroadcast(this, 0, new Intent("myFilter"), PendingIntent.FLAG_UPDATE_CURRENT);
+        mFloatingViewManager = new FloatingViewManager(this, this);
+        mFloatingViewManager.setFixedTrashIconImage(R.drawable.ic_trash_fixed);
+        mFloatingViewManager.setActionTrashIconImage(R.drawable.ic_trash_action);
+        final FloatingViewManager.Options options = new FloatingViewManager.Options();
+        options.shape = FloatingViewManager.SHAPE_CIRCLE;
+        mFloatingViewManager.addViewToWindow(bubbleView, options);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setAutoCancel(false);
-        builder.setContentTitle(getString(R.string.app_name));
-        builder.setContentText(getString(R.string.notif_text));
-        builder.setSubText(getString(R.string.quit_app));
-        builder.setSmallIcon(R.drawable.icon);
-        builder.setContentIntent(contentIntent);
-        builder.setOngoing(true);
-        builder.build();
-
-        startForeground(1, builder.getNotification());
+        return START_REDELIVER_INTENT;
     }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (mainUiView != null)
             mainUiView.removeView(windowManager);
-        if (bubbleView != null)
-            windowManager.removeView(bubbleView);
+        if (mFloatingViewManager != null) {
+            mFloatingViewManager.removeAllViewToWindow();
+            mFloatingViewManager = null;
+        }
+    }
+
+    @Override
+    public void onFinishFloatingView() {
+        String  trainerLvl = mainUiView.getTrainerLvl();
+
+        if (!TextUtils.isEmpty(trainerLvl))
+            Tools.saveTrainerLevel(this, trainerLvl);
+
+        stopSelf();
     }
 }

@@ -11,6 +11,8 @@ public class Pokemon {
     private int         id;
     private String      name;
     private Stats       stats;
+    private int         candy;
+    private String      family;
     private List<Move>  moves1;
     private List<Move>  moves2;
 
@@ -24,6 +26,14 @@ public class Pokemon {
 
     public Stats getStats() {
         return stats;
+    }
+
+    public int getCandy() {
+        return candy;
+    }
+
+    public String getFamily() {
+        return family;
     }
 
     public List<Move> getMoves1() {

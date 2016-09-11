@@ -6,6 +6,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.perso.red.pokeassistant.R;
+import com.perso.red.pokeassistant.mainUi.MainUiPresenter;
+import com.perso.red.pokeassistant.mainUi.MainUiView;
 import com.perso.red.pokeassistant.models.IVCalculatorModel;
 import com.perso.red.pokeassistant.ivcalculator.view.IVCalculatorView;
 import com.perso.red.pokeassistant.ivdetails.presenter.IVDetailsPresenter;
@@ -23,14 +25,16 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
     private IVCalculatorView        view;
     private IVCalculatorInteractor  interactor;
 
+    private MainUiPresenter     mainUiPresenter;
     private IVDetailsPresenter  ivDetailsPresenter;
     private MovePresenter       movePresenter;
 
-    public IVCalculatorPresenter(View layout, WindowManager windowManager, IVDetailsPresenter ivDetailsPresenter, MovePresenter movePresenter, IVCalculatorModel data) {
-        this.ivDetailsPresenter = ivDetailsPresenter;
-        this.movePresenter = movePresenter;
-        interactor = new IVCalculatorInteractor(data, layout.getContext().getAssets());
+    public IVCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, WindowManager windowManager) {
+        this.mainUiPresenter = mainUiPresenter;
+        interactor = new IVCalculatorInteractor(layout.getContext().getAssets());
         view = new IVCalculatorView(layout, windowManager, this);
+        ivDetailsPresenter = new IVDetailsPresenter(layout.findViewById(R.id.view_iv_details), interactor.getIvCalculatorModel());
+        movePresenter = new MovePresenter(layout.findViewById(R.id.view_moves));
         checkTrainerLvlSave(layout.getContext());
     }
 
@@ -107,8 +111,26 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
     }
 
     @Override
+    public void showIvDetails() {
+        movePresenter.getView().hide();
+        ivDetailsPresenter.onClick(R.id.btn_iv_details);
+    }
+
+    @Override
+    public void showMoves() {
+        ivDetailsPresenter.getView().hide();
+        movePresenter.onClick(R.id.btn_moves);
+    }
+
+    @Override
     public void setVisibility(int visibility) {
         view.setVisibility(visibility);
+        view.getMyArcPointer().setVisibility(visibility);
+    }
+
+    @Override
+    public void showMenu() {
+        mainUiPresenter.showMenu();
     }
 
     public String getTrainerLvl() {

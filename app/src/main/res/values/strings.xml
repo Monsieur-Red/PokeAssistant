@@ -1,16 +1,21 @@
 <resources>
-    <string name="app_name">Poke Assistant</string>
-    <string name="msg_permission_fr">Vous devez activer la permission \"Se superposer aux autres applications\" de Poke Assistant pour qu\'elle puisse fonctionner.\n\nSélectionne l\'application Poke Assistant et autorise la superposition sur autres applications.\n\nEnjoy!</string>
-    <string name="msg_permission_en">You must enable the permission \"Draw over other apps\" for Poke Assistant in order to run.\n\nSelect Poke Assistant Application then permit drawing over other apps.\n\nEnjoy!</string>
-
-    <!-- Service Notification -->
-    <string name="notif_text">Gotta Catch \'Em All!!</string>
-    <string name="quit_app">Click HERE to quit the APP</string>
+    <string name="app_name" translatable="false">Poke Assistant</string>
+    <string name="msg_permission">You must enable the permission \"Draw over other apps\" for Poke Assistant in order to run.\n\nSelect Poke Assistant Application then permit drawing over other apps.\n\nEnjoy!</string>
 
     <!-- SharedPreferences -->
-    <string name="first_run">first run</string>
-    <string name="sp_key">trainer lvl</string>
-    <string name="sp_default_value">default value</string>
+    <string name="first_run" translatable="false">first run</string>
+    <string name="sp_key" translatable="false">trainer lvl</string>
+    <string name="sp_default_value" translatable="false">default value</string>
+
+    <!-- Memu -->
+    <string name="menu">Menu</string>
+    <string name="back">Back</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="iv_calculator">Iv Calculator</string>
+    <string name="eggs">Eggs</string>
+    <string name="appraisal_guide">Team Leader Appraisal Analysis</string>
+    <string name="experience_calculator">XP Calculator</string>
+    <string name="evolution_calculator">Evolution Calculator</string>
 
     <!-- IV Calculator -->
     <string name="trainer_lvl">Trainer\nLVL</string>
@@ -21,7 +26,7 @@
     <string name="arc_mode">Arc mode</string>
     <string name="dust_mode">Dust mode</string>
     <string name="stardust">Stardust</string>
-    <string-array name="dust_array">
+    <string-array name="dust_array" translatable="false">
         <item>200</item>
         <item>400</item>
         <item>600</item>
@@ -43,18 +48,16 @@
         <item>9000</item>
         <item>10000</item>
     </string-array>
-    <string name="powered_up_en">Powered up?</string>
-    <string name="powered_up_fr">Recharger?</string>
+    <string name="powered_up">Powered up?</string>
 
     <!-- IV Details -->
     <string name="iv">IV</string>
     <string name="no_combinations">No combinations found for those entries.</string>
-    <string name="leader_text_fr">Résultat d\'évaluation du chef d\'équipe</string>
-    <string name="leader_text_en">Team Leader result analysis</string>
+    <string name="leader_text">Team Leader result analysis</string>
 
     <string name="attack">ATT</string>
     <string name="defense">DEF</string>
-    <string name="stamina">STA</string>
+    <string name="stamina">HP</string>
     <string name="total">TOTAL</string>
 
     <!-- Move -->
@@ -63,5 +66,108 @@
     <string name="power">Power</string>
     <string name="cast_time">Cast time</string>
     <string name="dps">Dps</string>
+
+    <!-- Eggs -->
+    <string name="gen">Gen : </string>
+    <string name="gen_1">1</string>
+    <string name="gen_2">2</string>
+    <string name="expand">Expand</string>
+    <string name="eggs_info_source">A reddit users named Vivpix calculated the Pokemon GO Generation 2 Egg chart by using the same logic Niantic used for Generation I. The original Gameboy games had the same walking mechanism for hatching Poke Eggs, but the difference is that distance was expressed in steps and not in kilometers.
+        \n\nThanks to prior research on Generation I Eggs, we now know how Niantic converted eggs and Pokemon from the original games into Pokemon GO:
+        \n-below 5000 steps becomes a 2 KM egg
+        \n-5000-5999 steps (the majority of Pokemon) are 5 KM eggs
+        \n-6000 and more steps becomes a 10 KM egg
+        \n\n(More information -> pokemongohub!!)</string>
+
+    <!-- Appraisal-->
+    <string name="instinct">Instinct</string>
+    <string name="mystic">Mystic</string>
+    <string name="valor">Valor</string>
+    <string name="iv_analysis">Overall Stat Analysis</string>
+    <string name="stat_analysis">Individual Stat Analysis</string>
+    <string name="size_analysis">Pokemon Size</string>
+
+    <string name="instinct_iv_base_phrase">Overall, your <i>\"PIKACHU\"</i>&#8230;</string>
+    <string name="instinct_iv_phrase_1">&#8230;looks like it can really battle with the best of them!</string>
+    <string name="instinct_iv_phrase_2">&#8230;is really strong!</string>
+    <string name="instinct_iv_phrase_3">&#8230;is pretty decent!</string>
+    <string name="instinct_iv_phrase_4">&#8230;has room for improvement as far as battling goes.</string>
+    <string name="instinct_stat_base_phrase">Its best quality is its (Attack/HP/Defense)&#8230;</string>
+    <string name="instinct_stat_base_phrase_2">The leader may say <i>\"Its (Attack/HP/Defense) is great, too!\"</i>, this means that this stat is equal to the best stat.</string>
+    <string name="instinct_stat_phrase_1">Its stats are the best I’ve ever seen! No doubt about it!</string>
+    <string name="instinct_stat_phrase_2">Its stats are really strong! Impressive.</string>
+    <string name="instinct_stat_phrase_3">It’s definitely got some good stats. Definitely!</string>
+    <string name="instinct_stat_phrase_4">Its stats are all right, but kinda basic, as far as I can see.</string>
+    <string name="instinct_size_base_phrase">Pokemon Size</string>
+    <string name="instinct_size_phrase_1">Your <i>\"PIKACHU\"</i> is just HUGE!</string>
+    <string name="instinct_size_phrase_2">Your <i>\"PIKACHU\"</i> is a BIG one!</string>
+    <string name="instinct_size_phrase_3">Your <i>\"PIKACHU\"</i> is a little small for its kind, don’t you think?</string>
+    <string name="instinct_size_phrase_4">Wh-whoa. That’s the tiniest <i>\"PIKACHU\"</i> I’ve ever seen!</string>
+
+    <string name="mystic_iv_base_phrase">Overall, your <i>\"PIKACHU\"</i>&#8230;</string>
+    <string name="mystic_iv_phrase_1">&#8230;is a wonder! What a breathtaking Pokemon!</string>
+    <string name="mystic_iv_phrase_2">&#8230;has certainly caught my attention.</string>
+    <string name="mystic_iv_phrase_3">&#8230;is above average.</string>
+    <string name="mystic_iv_phrase_4">&#8230;is not likely to make much headway in battle.</string>
+    <string name="mystic_stat_base_phrase">Its best quality is its (Attack/HP/Defense)&#8230;</string>
+    <string name="mystic_stat_base_phrase_2">The leader may say <i>\"It is matched equally by its (Attack/HP/Defense)\"</i>, this means that this stat is equal to the best stat.</string>
+    <string name="mystic_stat_phrase_1">Its stats exceed my calculations. It’s incredible!</string>
+    <string name="mystic_stat_phrase_2">I am certainly impressed by its stats, I must say.</string>
+    <string name="mystic_stat_phrase_3">Its stats are noticeably trending to the positive.</string>
+    <string name="mystic_stat_phrase_4">Its stats are not out of the norm, in my opinion.</string>
+    <string name="mystic_size_base_phrase">Pokemon Size</string>
+    <string name="mystic_size_phrase_1">The size of your <i>\"PIKACHU\"</i> is… colossal. This is indeed exceptional. Fascinating!</string>
+    <string name="mystic_size_phrase_2">Your <i>\"PIKACHU\"</i> is above average in size.</string>
+    <string name="mystic_size_phrase_3">Your <i>\"PIKACHU\"</i> is below average in size.</string>
+    <string name="mystic_size_phrase_4">Your <i>\"PIKACHU\"</i> is tinier than any we have on record. Astounding.</string>
+
+    <string name="valor_iv_base_phrase">Overall, your <i>\"PIKACHU\"</i>&#8230;</string>
+    <string name="valor_iv_phrase_1">&#8230;simply amazes me. It can accomplish anything!</string>
+    <string name="valor_iv_phrase_2">&#8230;is a strong Pokemon. You should be proud!</string>
+    <string name="valor_iv_phrase_3">&#8230;is a decent Pokemon.</string>
+    <string name="valor_iv_phrase_4">&#8230;may not be great in battle, but I still like it!</string>
+    <string name="valor_stat_base_phrase">Its best quality is its (Attack/HP/Defense)&#8230;</string>
+    <string name="valor_stat_base_phrase_2">The leader may say <i>\"I\'m just as impressed with its (Attack/HP/Defense)\"</i>, this means that this stat is equal to the best stat.</string>
+    <string name="valor_stat_phrase_1">I’m blown away by its stats. WOW!	</string>
+    <string name="valor_stat_phrase_2">It’s got excellent stats! How exciting!</string>
+    <string name="valor_stat_phrase_3">Its stats indicate that in battle, it’ll get the job done.</string>
+    <string name="valor_stat_phrase_4">Its stats don’t point to greatness in battle.</string>
+    <string name="valor_size_base_phrase">Pokemon Size</string>
+    <string name="valor_size_phrase_1">The size of your <i>\"PIKACHU\"</i> is gigantic—the largest I’ve ever seen!</string>
+    <string name="valor_size_phrase_2">Your <i>\"PIKACHU\"</i> is rather sizable, that’s for sure!</string>
+    <string name="valor_size_phrase_3">Aww, what a small <i>\"PIKACHU\"</i>! It’s rather cute, I’d say..</string>
+    <string name="valor_size_phrase_4">Your <i>\"PIKACHU\"</i> is so tiny, I almost didn’t notice it!</string>
+
+    <string name="iv_range_1" translatable="false">82% - 100%</string>
+    <string name="iv_range_2" translatable="false">67% - 80%</string>
+    <string name="iv_range_3" translatable="false">51% - 64%</string>
+    <string name="iv_range_4" translatable="false">0% - 49%</string>
+    <string name="stat_1" translatable="false">15</string>
+    <string name="stat_2" translatable="false">13 – 14</string>
+    <string name="stat_3" translatable="false">8 – 12</string>
+    <string name="stat_4" translatable="false">0 – 7</string>
+    <string name="size_1" translatable="false">XL</string>
+    <string name="size_2" translatable="false">Large</string>
+    <string name="size_3" translatable="false">Small</string>
+    <string name="size_4" translatable="false">XS</string>
+
+    <!-- XP Calculator -->
+    <string name="pokemon">Pokemon</string>
+    <string name="add">Add</string>
+    <string name="amount">Amount</string>
+    <string name="candy">Candy</string>
+    <string name="choice_transfert">Transfer each Pokemon after evolving</string>
+    <string name="choice_lucky_egg">Lucky Egg</string>
+    <string name="in" translatable="false">-></string>
+    <string name="transfert_title">Transfer before evolving:</string>
+    <string name="egg_title">Activate your Lucky Egg!</string>
+    <string name="evolve_title">Let\'s Evolve:</string>
+
+    <!-- Evolution Calculator -->
+    <string name="evolve">Evolve</string>
+    <string name="evo_calc_cp">CP<sup><small><small>1</small></small></sup></string>
+    <string name="evo_calc_max_cp">Max CP<sup><small><small>2</small></small></sup></string>
+    <string name="evo_calc_def_cp">1: This is the predicted Combat Power your Pokemon will reach once it has been evolved.</string>
+    <string name="evo_calc_def_max_cp">2: This is the highest Combat Power rating you will find for this Pokemon in the wild or hatched.</string>
 
 </resources>

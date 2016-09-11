@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="54%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginLeftPercent="20%"
+        android:orientation="horizontal"
+        android:background="@drawable/background_edit_text_round"
+
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/experience_calculator"
+        android:textSize="18sp"
+        android:textColor="@color/primary_text"
+        android:singleLine="false"
+        android:textStyle="bold"/>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="18%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/menu"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp" />
+
+    <ScrollView
+        android:layout_below="@+id/btn_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="80%"
+        app:layout_widthPercent="100%"
+        app:layout_marginTopPercent="4%"
+        app:layout_marginLeftPercent="4%"
+        app:layout_marginRightPercent="4%"
+        android:padding="10dp"
+        android:background="@drawable/background_edit_text_round">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/edit_text_pokemon_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+
+                    android:layout_gravity="center"
+                    android:hint="@string/pokemon"
+                    android:textColorHint="@color/secondary_text"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary_text"
+                    android:inputType="textAutoComplete|text"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:background="@drawable/background_edit_text_round" />
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginStart="14dp"
+
+                    android:layout_gravity="center"
+                    android:text="@string/add"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:textAllCaps="false"
+
+                    fbutton:buttonColor="@color/fbutton_color_turquoise"
+                    fbutton:shadowColor="@color/fbutton_color_green_sea"
+                    fbutton:shadowEnabled="true"
+                    fbutton:shadowHeight="5dp"
+                    fbutton:cornerRadius="15dp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp" />
+
+            <LinearLayout
+                android:id="@+id/container_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="vertical"
+                android:background="@drawable/background_edit_text_round">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/experience"
+                        android:layout_toLeftOf="@+id/in"
+                        android:layout_toStartOf="@+id/in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/fbutton_color_turquoise"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:singleLine="true"/>
+
+                    <TextView
+                        android:id="@+id/in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="@string/in"
+                        android:textColor="@color/primary_text"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:singleLine="true"/>
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/in"
+                        android:layout_toEndOf="@+id/in"
+
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/fbutton_color_turquoise"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:singleLine="true"/>
+
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/checkbox_lucky_egg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+
+                    android:theme="@style/MyCheckBox"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/choice_lucky_egg"
+                    android:textSize="15sp"
+                    android:textColor="@color/primary_text"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/transfert_before_evolving"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/transfert_title"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/transfert_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"
+                    android:singleLine="false" />
+
+                <TextView
+                    android:id="@+id/activate_your_lucky_egg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/egg_title"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+
+                    android:text="@string/evolve_title"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/evolve_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.percent.PercentRelativeLayout>

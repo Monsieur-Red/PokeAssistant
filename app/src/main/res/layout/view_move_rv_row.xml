@@ -55,7 +55,7 @@
             android:textColor="@color/primary_text"
             android:textSize="14sp"
             android:singleLine="true"
-            android:background="@drawable/background_edit_text_iv_calculator"/>
+            android:background="@drawable/background_edit_text_round"/>
 
         <TextView
             android:id="@+id/text_view_move_cast_time"
@@ -70,7 +70,7 @@
             android:textColor="@color/primary_text"
             android:textSize="14sp"
             android:singleLine="true"
-            android:background="@drawable/background_edit_text_iv_calculator"/>
+            android:background="@drawable/background_edit_text_round"/>
 
         <TextView
             android:id="@+id/text_view_move_dps"
@@ -85,7 +85,7 @@
             android:textColor="@color/primary_text"
             android:textSize="14sp"
             android:singleLine="true"
-            android:background="@drawable/background_edit_text_iv_calculator"/>
+            android:background="@drawable/background_edit_text_round"/>
 
     </LinearLayout>
 

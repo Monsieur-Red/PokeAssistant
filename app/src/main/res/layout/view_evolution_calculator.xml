@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="54%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginLeftPercent="20%"
+        android:orientation="horizontal"
+        android:background="@drawable/background_edit_text_round"
+
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/evolution_calculator"
+        android:textSize="18sp"
+        android:textColor="@color/primary_text"
+        android:singleLine="false"
+        android:textStyle="bold"/>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="18%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/menu"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp" />
+
+    <ScrollView
+        android:layout_below="@+id/btn_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="80%"
+        app:layout_widthPercent="100%"
+        app:layout_marginTopPercent="4%"
+        app:layout_marginLeftPercent="4%"
+        app:layout_marginRightPercent="4%"
+        android:padding="10dp"
+        android:fillViewport="true"
+        android:background="@drawable/background_edit_text_round">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:weightSum="1">
+
+                <AutoCompleteTextView
+                    android:id="@+id/search_pokemon_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:padding="10dp"
+
+                    android:layout_gravity="center"
+                    android:hint="@string/pokemon"
+                    android:textColorHint="@color/secondary_text"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary_text"
+                    android:inputType="text"
+                    android:nextFocusRight="@+id/search_cp"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:background="@drawable/background_edit_text_round" />
+
+                <EditText
+                    android:id="@+id/search_cp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+
+                    android:layout_gravity="center"
+                    android:hint="@string/pokemon_cp"
+                    android:textColorHint="@color/secondary_text"
+                    android:textSize="18sp"
+                    android:textColor="@color/primary_text"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:maxLength="5"
+                    android:background="@drawable/background_edit_text_round" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/container_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:background="@drawable/background_edit_text_rectangle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:layout_gravity="center"
+                        android:text="@string/pokemon"
+                        android:textColor="@color/primary_text"
+                        android:textSize="15sp"
+                        android:singleLine="true" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:layout_gravity="center"
+                        android:text="@string/evo_calc_cp"
+                        android:textColor="@color/primary_text"
+                        android:textSize="15sp"
+                        android:singleLine="true"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:layout_gravity="center"
+                        android:text="@string/evo_calc_max_cp"
+                        android:textColor="@color/primary_text"
+                        android:textSize="15sp"
+                        android:singleLine="true" />
+
+                    <ImageButton
+                        android:id="@+id/btn_delete"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_delete_forever_red_900_48dp"
+                        android:scaleType="centerInside"
+                        android:background="@android:color/transparent" />
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@string/evo_calc_def_cp"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="15sp"
+                    android:singleLine="false" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
+                    android:text="@string/evo_calc_def_max_cp"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="15sp"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.percent.PercentRelativeLayout>

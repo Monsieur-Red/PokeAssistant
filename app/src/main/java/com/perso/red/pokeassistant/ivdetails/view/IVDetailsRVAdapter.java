@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by pierr on 23/08/2016.
  */
@@ -26,17 +29,14 @@ public class IVDetailsRVAdapter extends RecyclerView.Adapter<IVDetailsRVAdapter.
     }
 
     public class DataObjectHolder extends RecyclerView.ViewHolder {
-        TextView    attack;
-        TextView    defense;
-        TextView    stamina;
-        TextView    total;
+        @BindView(R.id.text_view_iv_attack)     TextView    attack;
+        @BindView(R.id.text_view_iv_defense)    TextView    defense;
+        @BindView(R.id.text_view_iv_stamina)    TextView    stamina;
+        @BindView(R.id.text_view_iv_total)      TextView    total;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            attack = (TextView) itemView.findViewById(R.id.text_view_iv_attack);
-            defense = (TextView) itemView.findViewById(R.id.text_view_iv_defense);
-            stamina = (TextView) itemView.findViewById(R.id.text_view_iv_stamina);
-            total = (TextView) itemView.findViewById(R.id.text_view_iv_total);
+            ButterKnife.bind(this, itemView);
         }
     }
 

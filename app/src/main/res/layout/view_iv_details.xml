@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:background="@drawable/background_edit_text_round">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+
+        android:gravity="center"
+        android:text="@string/leader_text"
+        android:textColor="@color/primary_text"
+        android:textSize="16sp"
+        android:singleLine="false"/>
+
+    <LinearLayout
+        android:id="@+id/view_iv_details_tab_leader_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox_attack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:theme="@style/MyCheckBox"
+            android:gravity="center"
+            android:text="@string/attack"
+            android:textSize="14sp"
+            android:textColor="@color/primary_text"
+            android:singleLine="true" />
+
+        <CheckBox
+            android:id="@+id/checkbox_defense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:theme="@style/MyCheckBox"
+            android:gravity="center"
+            android:text="@string/defense"
+            android:textSize="14sp"
+            android:textColor="@color/primary_text"
+            android:singleLine="true" />
+
+        <CheckBox
+            android:id="@+id/checkbox_stamina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:theme="@style/MyCheckBox"
+            android:gravity="center"
+            android:text="@string/stamina"
+            android:textSize="14sp"
+            android:textColor="@color/primary_text"
+            android:singleLine="true" />
+
+        <!--<com.rey.material.widget.CheckBox-->
+            <!--android:id="@+id/checkbox_attack"-->
+            <!--style="@style/Material.Drawable.CheckBox"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:gravity="center"-->
+            <!--app:cbd_strokeColor="@color/fbutton_color_turquoise"-->
+            <!--android:text="@string/attack"-->
+            <!--android:textSize="14sp"-->
+            <!--android:textColor="@color/primary_text"-->
+            <!--android:singleLine="true" />-->
+
+        <!--<com.rey.material.widget.CheckBox-->
+            <!--android:id="@+id/checkbox_defense"-->
+            <!--style="@style/Material.Drawable.CheckBox"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+
+            <!--android:gravity="center"-->
+            <!--app:cbd_strokeColor="@color/fbutton_color_turquoise"-->
+            <!--android:buttonTint="@color/primary"-->
+            <!--android:text="@string/defense"-->
+            <!--android:textSize="14sp"-->
+            <!--android:textColor="@color/primary_text"-->
+            <!--android:singleLine="true" />-->
+
+        <!--<com.rey.material.widget.CheckBox-->
+            <!--android:id="@+id/checkbox_stamina"-->
+            <!--style="@style/Material.Drawable.CheckBox"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:gravity="center"-->
+            <!--app:cbd_strokeColor="@color/fbutton_color_turquoise"-->
+            <!--android:text="@string/stamina"-->
+            <!--android:textSize="14sp"-->
+            <!--android:textColor="@color/primary_text"-->
+            <!--android:singleLine="true" />-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_view_no_combinations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/no_combinations"
+        android:textColor="@color/primary_text"
+        android:textSize="16sp"
+        android:singleLine="false"/>
+
+    <LinearLayout
+        android:id="@+id/view_iv_details_tab_iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_view_iv_details_min"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:textColor="@color/min"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/text_view_iv_details_average"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:textColor="@color/average"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/text_view_iv_details_max"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:textColor="@color/max"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:singleLine="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_iv_details_tab_titles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:text="@string/attack"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:singleLine="true"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:text="@string/defense"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:singleLine="true"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:text="@string/stamina"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:singleLine="true"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:text="@string/total"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_iv_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

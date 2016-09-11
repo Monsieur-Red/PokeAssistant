@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_view_pokemon_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="8%"
+        app:layout_widthPercent="40%"
+        app:layout_marginTopPercent="6%"
+        android:padding="12dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:nextFocusDown="@+id/edit_text_pokemon_cp"
+        android:hint="@string/pokemon_name"
+        android:textColorHint="@color/secondary_text"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:background="@drawable/background_edit_text_round"
+        android:alpha="0.8" />
+
+    <LinearLayout
+        android:id="@+id/view_pokemons_names"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="37%"
+        app:layout_widthPercent="60%"
+        app:layout_marginTopPercent="6%"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/background_edit_text_round"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/edit_text_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+
+            android:hint="@android:string/search_go"
+            android:textColorHint="@color/secondary_text"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:background="@android:color/transparent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/secondary_text"/>
+
+        <ListView
+            android:id="@+id/list_view_pokemons_names"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/secondary_text"
+            android:dividerHeight="1dp"/>
+
+    </LinearLayout>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="18%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/menu"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp"
+        android:alpha="0.8" />
+
+
+</android.support.percent.PercentRelativeLayout>

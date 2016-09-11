@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="msg_permission">Vous devez activer la permission \"Se superposer aux autres applications\" de Poke Assistant pour qu\'elle puisse fonctionner.\n\nSélectionne l\'application Poke Assistant et autorise la superposition sur autres applications.\n\nEnjoy!</string>
+
+    <!-- Memu -->
+    <string name="menu">Menu</string>
+    <string name="back">Retour</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="iv_calculator">Calculateur IV</string>
+    <string name="eggs">Oeufs</string>
+    <string name="appraisal_guide">Évaluation Des Chefs d\'Équipe</string>
+    <string name="experience_calculator">Calculateur XP</string>
+    <string name="evolution_calculator">Calculateur Évolution</string>
+
+    <!-- IV Calculator -->
+    <string name="trainer_lvl">Niveau\nDresseur</string>
+    <string name="pokemon_name">Nom Pokémon</string>
+    <string name="pokemon_cp">PC</string>
+    <string name="pokemon_hp">PV</string>
+    <string name="pokemon_lvl">Niv Poké</string>
+    <string name="arc_mode">Arc</string>
+    <string name="dust_mode">Poussière</string>
+    <string name="stardust">Poussière d\'étoiles</string>
+    <string name="powered_up">Recharger?</string>
+
+    <!-- IV Details -->
+    <string name="iv">IV</string>
+    <string name="no_combinations">Aucun résultat trouvé.</string>
+    <string name="leader_text">Résultat d\'évaluation du chef d\'équipe</string>
+
+
+    <string name="attack">ATT</string>
+    <string name="defense">DEF</string>
+    <string name="stamina">PV</string>
+    <string name="total">TOTAL</string>
+
+    <!-- Move -->
+    <string name="move">ATT</string>
+    <string name="name">Nom</string>
+    <string name="power">Puissance</string>
+    <string name="cast_time">Durée</string>
+    <string name="dps">Dps</string>
+
+    <!-- Eggs -->
+    <string name="gen">Gen : </string>
+    <string name="gen_1">1</string>
+    <string name="gen_2">2</string>
+    <string name="expand">Tout afficher</string>
+    <string name="eggs_info_source">Vivpix, un utilisateur de reddit, a calculé la liste des Pokemon Generation 2 que nous trouverons dans les oeufs. Les jeux Pokemon sur gameboy ont le même système pour faire éclore les oeufs sauf que la distance est calculée en pas et non en kilomètres.
+        \n- un oeuf de 2 km correspond à 5000 pas (et en-dessous)
+        \n- un oeuf de 5 km éclot entre 5000-5999 pas
+        \n- un oeuf de 1 0km éclot à partir de 6000 pas
+        \n\n (Plus d\'informations -> pokemongohub!!)</string>
+
+    <!-- Appraisal-->
+    <string name="instinct">Intuition</string>
+    <string name="mystic">Sagesse</string>
+    <string name="valor">Bravoure</string>
+    <string name="iv_analysis">IV général du pokémon</string>
+    <string name="stat_analysis">La meilleure stat du pokémon</string>
+    <string name="size_analysis">Taille du pokémon</string>
+
+    <string name="instinct_iv_base_phrase">Dans l\'ensemble, ton <i>\"PIKACHU\"</i>&#8230;</string>
+    <string name="instinct_iv_phrase_1">&#8230;semble capable de tenir tête aux meilleurs.</string>
+    <string name="instinct_iv_phrase_2">&#8230;est vraiment fort.</string>
+    <string name="instinct_iv_phrase_3">&#8230;est plutôt bien.</string>
+    <string name="instinct_iv_phrase_4">&#8230;peut devenir un meilleur combattant.</string>
+    <string name="instinct_stat_base_phrase">Son meilleur atout est son capital (Attaque/PV/Défense)&#8230;</string>
+    <string name="instinct_stat_base_phrase_2">Il est possible que le leader vous dise que <i>\"votre attaque est du même calibre que le capital PV\"</i> par exemple. Cela signifie que ces deux stats ont la même note.</string>
+    <string name="instinct_stat_phrase_1">Ses stats sont les meilleures que j’ai jamais vu ! Sans aucun doute !</string>
+    <string name="instinct_stat_phrase_2">Ses stats sont super élevées. Impressionnant !</string>
+    <string name="instinct_stat_phrase_3">Il a quelques bonnes stats, c’est sûr !</string>
+    <string name="instinct_stat_phrase_4">Ses stats ne sont pas mal, mais un peu basiques, il me semble.</string>
+    <string name="instinct_size_base_phrase">Taille du Pokémon</string>
+    <string name="instinct_size_phrase_1">Ton <i>\"PIKACHU\"</i> est juste ÉNORME !</string>
+    <string name="instinct_size_phrase_2">Ton <i>\"PIKACHU\"</i> est GROS !</string>
+    <string name="instinct_size_phrase_3">Ton <i>\"PIKACHU\"</i> est un peu petit pour son genre, non ?</string>
+    <string name="instinct_size_phrase_4">Wh-whoa. C\'est le plus petit <i>\"PIKACHU\"</i> que j\'ai jamais vu !</string>
+
+    <string name="mystic_iv_base_phrase">Dans l\'ensemble, ton <i>\"PIKACHU\"</i>&#8230;</string>
+    <string name="mystic_iv_phrase_1">&#8230;est une merveille. Un Pokémon captivant.</string>
+    <string name="mystic_iv_phrase_2">&#8230;a retenue toute mon attention.</string>
+    <string name="mystic_iv_phrase_3">&#8230;est supérieur à la moyenne.</string>
+    <string name="mystic_iv_phrase_4">&#8230;n\’ira pas très loin au combat.</string>
+    <string name="mystic_stat_base_phrase">Son meilleur atout est son capital (Attaque/PV/Défense)&#8230;</string>
+    <string name="mystic_stat_base_phrase_2">Il est possible que le leader vous dise que <i>\"votre attaque est du même calibre que le capital PV"</i> par exemple. Cela signifie que ces deux stats ont la même note.</string>
+    <string name="mystic_stat_phrase_1">Ses stats dépassent tous mes calculs, c\’est incroyable !</string>
+    <string name="mystic_stat_phrase_2">Je suis impressionné par ses stats, à vrai dire.</string>
+    <string name="mystic_stat_phrase_3">Ses stats s’améliorent à vue d’oeil.</string>
+    <string name="mystic_stat_phrase_4">Ses stats n’ont rien d’anormal, à priori.</string>
+    <string name="mystic_size_base_phrase">Taille du Pokémon</string>
+    <string name="mystic_size_phrase_1">Ton <i>\"PIKACHU\"</i> est colossal. Une vraie anomalie statistique. C\'est fascinant !</string>
+    <string name="mystic_size_phrase_2">Ton <i>\"PIKACHU\"</i> est de taille supérieure à la moyenne.</string>
+    <string name="mystic_size_phrase_3">Ton <i>\"PIKACHU\"</i> est de taille inférieure à la moyenne.</string>
+    <string name="mystic_size_phrase_4">Ton <i>\"PIKACHU\"</i> est l\'un des plus petits Pokémon existants. Étonnant.</string>
+
+    <string name="valor_iv_base_phrase">Dans l\'ensemble, ton <i>\"PIKACHU\"</i>&#8230;</string>
+    <string name="valor_iv_phrase_1">&#8230;m\’étonne beaucoup, il peut tout faire.</string>
+    <string name="valor_iv_phrase_2">&#8230;est très fort, tu dois être fier.</string>
+    <string name="valor_iv_phrase_3">&#8230;est un pokemon solide.</string>
+    <string name="valor_iv_phrase_4">&#8230;n\’est pas un combattant, mais je l\’aime bien.</string>
+    <string name="valor_stat_base_phrase">Son meilleur atout est son capital (Attaque/PV/Défense)&#8230;</string>
+    <string name="valor_stat_base_phrase_2">Il est possible que le leader vous dise que <i>\"votre attaque est du même calibre que le capital PV"</i> par exemple. Cela signifie que ces deux stats ont la même note.</string>
+    <string name="valor_stat_phrase_1">Je suis estomaquée par ses stats. Bravo !</string>
+    <string name="valor_stat_phrase_2">Ses stats sont excellentes c’est super.</string>
+    <string name="valor_stat_phrase_3">Ses stats indiquent qu’il va faire des dégâts au combat.</string>
+    <string name="valor_stat_phrase_4">Ses stats ne t’aideront pas beaucoup au combat.</string>
+    <string name="valor_size_base_phrase">Taille du Pokémon</string>
+    <string name="valor_size_phrase_1">Ton <i>\"PIKACHU\"</i> est gigantesque. Le plus grand que j\'ai jamais vu.</string>
+    <string name="valor_size_phrase_2">Ton <i>\"PIKACHU\"</i> est assez grand, c\'est sûr !</string>
+    <string name="valor_size_phrase_3">Aww, quel petit <i>\"PIKACHU\"</i> ! Il est plutôt mignon, je dirais.</string>
+    <string name="valor_size_phrase_4">Ton <i>\"PIKACHU\"</i> est si petit, je ne l\'ai presque pas remarqué.</string>
+
+    <!-- XP Calculator -->
+    <string name="pokemon">Pokémon</string>
+    <string name="add">Ajouter</string>
+    <string name="amount">Total</string>
+    <string name="candy">Bonbon</string>
+    <string name="choice_transfert">Transférer chaque Pokémon après les avoir évolués</string>
+    <string name="choice_lucky_egg">Oeuf Chance</string>
+    <string name="transfert_title">Tranfert avant d\'évoluer:</string>
+    <string name="egg_title">Active ton oeuf chance!</string>
+    <string name="evolve_title">Lance les évolutions:</string>
+
+    <!-- Evolution Calculator -->
+    <string name="evolve">Évoluer</string>
+    <string name="evo_calc_cp">PC<sup><small><small>1</small></small></sup></string>
+    <string name="evo_calc_max_cp">Max PC<sup><small><small>2</small></small></sup></string>
+    <string name="evo_calc_def_cp">1: PC obtenu par votre Pokémon après avoir évolué.</string>
+    <string name="evo_calc_def_max_cp">2: PC maximum pour un Pokemon trouvé dans la nature ou dans un oeuf.</string>
+
+</resources>
