@@ -8,6 +8,7 @@
     android:background="@drawable/background_edit_text_round">
 
     <TextView
+        android:id="@+id/text_view_team_leader_result_analysis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -28,9 +29,24 @@
         android:orientation="horizontal">
 
         <CheckBox
+            android:id="@+id/checkbox_auto_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:checked="true"
+            android:theme="@style/MyCheckBox"
+            android:gravity="center"
+            android:text="@string/auto_calc"
+            android:textSize="14sp"
+            android:textColor="@color/primary_text"
+            android:singleLine="true" />
+
+        <CheckBox
             android:id="@+id/checkbox_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
 
             android:theme="@style/MyCheckBox"
             android:gravity="center"
@@ -43,8 +59,8 @@
             android:id="@+id/checkbox_defense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
 
             android:theme="@style/MyCheckBox"
             android:gravity="center"
@@ -57,6 +73,8 @@
             android:id="@+id/checkbox_stamina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
 
             android:theme="@style/MyCheckBox"
             android:gravity="center"
@@ -64,48 +82,6 @@
             android:textSize="14sp"
             android:textColor="@color/primary_text"
             android:singleLine="true" />
-
-        <!--<com.rey.material.widget.CheckBox-->
-            <!--android:id="@+id/checkbox_attack"-->
-            <!--style="@style/Material.Drawable.CheckBox"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-
-            <!--android:gravity="center"-->
-            <!--app:cbd_strokeColor="@color/fbutton_color_turquoise"-->
-            <!--android:text="@string/attack"-->
-            <!--android:textSize="14sp"-->
-            <!--android:textColor="@color/primary_text"-->
-            <!--android:singleLine="true" />-->
-
-        <!--<com.rey.material.widget.CheckBox-->
-            <!--android:id="@+id/checkbox_defense"-->
-            <!--style="@style/Material.Drawable.CheckBox"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-
-            <!--android:gravity="center"-->
-            <!--app:cbd_strokeColor="@color/fbutton_color_turquoise"-->
-            <!--android:buttonTint="@color/primary"-->
-            <!--android:text="@string/defense"-->
-            <!--android:textSize="14sp"-->
-            <!--android:textColor="@color/primary_text"-->
-            <!--android:singleLine="true" />-->
-
-        <!--<com.rey.material.widget.CheckBox-->
-            <!--android:id="@+id/checkbox_stamina"-->
-            <!--style="@style/Material.Drawable.CheckBox"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-
-            <!--android:gravity="center"-->
-            <!--app:cbd_strokeColor="@color/fbutton_color_turquoise"-->
-            <!--android:text="@string/stamina"-->
-            <!--android:textSize="14sp"-->
-            <!--android:textColor="@color/primary_text"-->
-            <!--android:singleLine="true" />-->
 
     </LinearLayout>
 

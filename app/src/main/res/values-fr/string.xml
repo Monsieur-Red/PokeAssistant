@@ -22,13 +22,12 @@
     <string name="dust_mode">Poussière</string>
     <string name="stardust">Poussière d\'étoiles</string>
     <string name="powered_up">Recharger?</string>
+    <string name="calculate">Calculer</string>
 
     <!-- IV Details -->
     <string name="iv">IV</string>
     <string name="no_combinations">Aucun résultat trouvé.</string>
     <string name="leader_text">Résultat d\'évaluation du chef d\'équipe</string>
-
-
     <string name="attack">ATT</string>
     <string name="defense">DEF</string>
     <string name="stamina">PV</string>

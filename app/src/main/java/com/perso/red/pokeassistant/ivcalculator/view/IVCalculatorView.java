@@ -55,6 +55,7 @@ public class IVCalculatorView implements IIVCalculatorView {
     @BindView(R.id.spinner_pokemon_dust)    Spinner         pokemonDust;
     @BindView(R.id.btn_arc_mode)            Button          arcModeBtn;
     @BindView(R.id.btn_dust_mode)           Button          dustModeBtn;
+    @BindView(R.id.btn_calculate)           Button          calculateBtn;
 
     private boolean     arcModeShown;
     private double      estimatedPokemonLvl;
@@ -346,6 +347,11 @@ public class IVCalculatorView implements IIVCalculatorView {
             setDustModeVisibility(visibility);
     }
 
+    @Override
+    public void setCalculateBtnVisibility(int visibility) {
+        calculateBtn.setVisibility(visibility);
+    }
+
     @OnCheckedChanged (R.id.checkbox_pokemon_powered_up)
     public void setPokemonPoweredUp(boolean isChecked) {
         presenter.setPokemonPoweredUp(isChecked);
@@ -366,20 +372,25 @@ public class IVCalculatorView implements IIVCalculatorView {
         presenter.showMoves();
     }
 
-    @OnClick (R.id.btn_arc_mode)
-    public void setArcMode() {
+    @OnClick(R.id.btn_arc_mode)
+    public void OnClickArcMode() {
         arcModeShown = true;
         setDustModeVisibility(View.GONE);
         setArcModeVisibility(View.VISIBLE);
         presenter.setCalculatorMode(Constants.CALCULATOR_MODE_ARC);
     }
 
-    @OnClick (R.id.btn_dust_mode)
-    public void setDustMode() {
+    @OnClick(R.id.btn_dust_mode)
+    public void OnClickDustMode() {
         arcModeShown = false;
         setArcModeVisibility(View.GONE);
         setDustModeVisibility(View.VISIBLE);
         presenter.setCalculatorMode(Constants.CALCULATOR_MODE_DUST);
+    }
+
+    @OnClick(R.id.btn_calculate)
+    public void OnClickCalculateBtn() {
+        presenter.calcIv();
     }
 
     public ImageView getMyArcPointer() {

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.perso.red.pokeassistant.R;
 import com.perso.red.pokeassistant.ivdetails.presenter.IVDetailsPresenter;
 import com.perso.red.pokeassistant.models.IVResult;
-import com.perso.red.pokeassistant.utils.Constants;
 
 import java.util.List;
 import java.util.Locale;
@@ -29,6 +28,7 @@ public class IVDetailsView implements IIVDetailsView {
     private View                view;
     private IVDetailsPresenter  presenter;
 
+    @BindView(R.id.text_view_team_leader_result_analysis)TextView       leaderRA;
     @BindView(R.id.text_view_no_combinations)           TextView        noCombinations;
     @BindView(R.id.checkbox_attack)                     CheckBox        attackCheckBox;
     @BindView(R.id.checkbox_defense)                    CheckBox        defenseCheckBox;
@@ -50,6 +50,16 @@ public class IVDetailsView implements IIVDetailsView {
         adapter = new IVDetailsRVAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+    }
+
+    @OnCheckedChanged(R.id.checkbox_auto_calculate)
+    public void OnCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked)
+            leaderRA.setVisibility(View.VISIBLE);
+        else
+            leaderRA.setVisibility(View.GONE);
+
+        presenter.onCheckedChanged(buttonView.getId(), isChecked);
     }
 
     @OnCheckedChanged(R.id.checkbox_attack)

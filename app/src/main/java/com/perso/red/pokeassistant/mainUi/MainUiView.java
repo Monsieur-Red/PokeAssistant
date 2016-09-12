@@ -2,6 +2,7 @@ package com.perso.red.pokeassistant.mainUi;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class MainUiView implements MainUi.View {
     public MainUiView(MyService service, WindowManager windowManager) {
         context = service;
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP)
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             blurBg = true;
 
         menuView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_menu, null);

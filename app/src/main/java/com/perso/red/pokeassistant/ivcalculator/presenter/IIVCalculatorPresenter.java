@@ -26,6 +26,10 @@ public interface IIVCalculatorPresenter {
 
     void showMoves();
 
+    void setAutoCalcMode(boolean isChecked);
+
+    void calcIv();
+
     void setVisibility(int visibility);
 
     void showMenu();

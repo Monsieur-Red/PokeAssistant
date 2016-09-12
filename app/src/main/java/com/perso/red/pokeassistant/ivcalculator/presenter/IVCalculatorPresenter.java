@@ -7,8 +7,6 @@ import android.widget.ImageView;
 
 import com.perso.red.pokeassistant.R;
 import com.perso.red.pokeassistant.mainUi.MainUiPresenter;
-import com.perso.red.pokeassistant.mainUi.MainUiView;
-import com.perso.red.pokeassistant.models.IVCalculatorModel;
 import com.perso.red.pokeassistant.ivcalculator.view.IVCalculatorView;
 import com.perso.red.pokeassistant.ivdetails.presenter.IVDetailsPresenter;
 import com.perso.red.pokeassistant.move.presenter.MovePresenter;
@@ -33,7 +31,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         this.mainUiPresenter = mainUiPresenter;
         interactor = new IVCalculatorInteractor(layout.getContext().getAssets());
         view = new IVCalculatorView(layout, windowManager, this);
-        ivDetailsPresenter = new IVDetailsPresenter(layout.findViewById(R.id.view_iv_details), interactor.getIvCalculatorModel());
+        ivDetailsPresenter = new IVDetailsPresenter(layout.findViewById(R.id.view_iv_details), this, interactor.getIvCalculatorModel());
         movePresenter = new MovePresenter(layout.findViewById(R.id.view_moves));
         checkTrainerLvlSave(layout.getContext());
     }
@@ -50,7 +48,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         interactor.setTrainerLvl(Integer.valueOf(trainerLvl));
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -59,7 +57,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         view.hidePokemonsNames(name);
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         interactor.setPokemonCP(Integer.valueOf(cp));
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -75,7 +73,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         interactor.setPokemonHP(Integer.valueOf(hp));
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -83,7 +81,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         interactor.setPokemonLvl(lvl);
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -91,7 +89,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         interactor.setPokemonDust(dust);
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -99,7 +97,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         interactor.setPokemonPoweredUp(poweredUp);
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -107,7 +105,7 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
         interactor.setCalculatorMode(mode);
 
         if (view.isInputsFilled())
-            ivDetailsPresenter.update();
+            ivDetailsPresenter.update(false);
     }
 
     @Override
@@ -131,6 +129,20 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
     @Override
     public void showMenu() {
         mainUiPresenter.showMenu();
+    }
+
+    @Override
+    public void setAutoCalcMode(boolean isChecked) {
+        if (isChecked)
+            view.setCalculateBtnVisibility(View.GONE);
+        else
+            view.setCalculateBtnVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void calcIv() {
+        if (view.isInputsFilled())
+            ivDetailsPresenter.update(true);
     }
 
     public String getTrainerLvl() {

@@ -3,6 +3,7 @@ package com.perso.red.pokeassistant.ivdetails.presenter;
 import android.view.View;
 
 import com.perso.red.pokeassistant.R;
+import com.perso.red.pokeassistant.ivcalculator.presenter.IVCalculatorPresenter;
 import com.perso.red.pokeassistant.models.IVCalculatorModel;
 import com.perso.red.pokeassistant.models.IVResult;
 import com.perso.red.pokeassistant.ivdetails.view.IVDetailsView;
@@ -18,7 +19,10 @@ public class IVDetailsPresenter implements IIVDetailsPresenter, IOnIVDetailsFini
     private IVDetailsView       view;
     private IVDetailsInteractor interactor;
 
-    public IVDetailsPresenter(View layout, IVCalculatorModel data) {
+    private IVCalculatorPresenter ivCalculatorPresenter;
+
+    public IVDetailsPresenter(View layout, IVCalculatorPresenter ivCalculatorPresenter, IVCalculatorModel data) {
+        this.ivCalculatorPresenter = ivCalculatorPresenter;
         view = new IVDetailsView(layout, this);
         interactor = new IVDetailsInteractor(data, layout.getContext().getAssets());
     }
@@ -38,6 +42,10 @@ public class IVDetailsPresenter implements IIVDetailsPresenter, IOnIVDetailsFini
     @Override
     public void onCheckedChanged(int viewId, boolean isChecked) {
         switch (viewId) {
+            case R.id.checkbox_auto_calculate:
+                interactor.setAutoCalcChecked(isChecked);
+                ivCalculatorPresenter.setAutoCalcMode(isChecked);
+                break;
             case R.id.checkbox_attack:
                 interactor.setAttackCbChecked(isChecked);
                 filterIVs();
@@ -54,8 +62,11 @@ public class IVDetailsPresenter implements IIVDetailsPresenter, IOnIVDetailsFini
     }
 
     @Override
-    public void update() {
-        interactor.update(this);
+    public void update(boolean manually) {
+        if (manually)
+            interactor.updateManually(this);
+        else
+            interactor.update(this);
     }
 
     @Override

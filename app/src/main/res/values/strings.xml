@@ -49,12 +49,14 @@
         <item>10000</item>
     </string-array>
     <string name="powered_up">Powered up?</string>
+    <string name="calculate">Calculate</string>
 
     <!-- IV Details -->
     <string name="iv">IV</string>
     <string name="no_combinations">No combinations found for those entries.</string>
     <string name="leader_text">Team Leader result analysis</string>
 
+    <string name="auto_calc" translatable="false">Auto Calc</string>
     <string name="attack">ATT</string>
     <string name="defense">DEF</string>
     <string name="stamina">HP</string>

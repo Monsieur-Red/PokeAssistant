@@ -9,8 +9,8 @@ android {
         applicationId "com.perso.red.pokeassistant"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 7
-        versionName "2.0"
+        versionCode 8
+        versionName "2.0.1"
     }
     buildTypes {
         release {
@@ -26,7 +26,7 @@ android {
     productFlavors {
         prod {
             applicationId = "com.perso.red.pokeassistant"
-            versionName = "2.0-free"
+            versionName = "2.0.1-free"
         }
     }
 

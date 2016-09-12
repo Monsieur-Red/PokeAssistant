@@ -11,4 +11,6 @@ public interface IIVCalculatorView {
     boolean isInputsFilled();
 
     void setVisibility(int visibility);
+
+    void setCalculateBtnVisibility(int visibility);
 }

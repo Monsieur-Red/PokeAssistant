@@ -26,6 +26,7 @@ public class IVDetailsInteractor {
     private DustToLevel         dustToLevel;
     private List<IVResult>      ivResultsFinal;
 
+    private boolean autoCalcChecked;
     private boolean attackCbChecked;
     private boolean defenseCbChecked;
     private boolean staminaCbChecked;
@@ -35,13 +36,33 @@ public class IVDetailsInteractor {
         pokemonJson = new PokemonJson(assetManager);
         dustToLevel = new DustToLevel(assetManager);
         ivResultsFinal = new ArrayList<>();
+        autoCalcChecked = true;
         attackCbChecked = false;
         defenseCbChecked = false;
         staminaCbChecked = false;
     }
 
     public void update(IOnIVDetailsFinishedListener listener) {
-        List<IVResult>  ivResultsFilter;
+        if (autoCalcChecked) {
+            List<IVResult> ivResultsFilter;
+
+            if (ivCalculatorModel.getCalculatorMode() == Constants.CALCULATOR_MODE_ARC)
+                guessingIVsArcMode();
+            else
+                guessingIVsDustMode();
+
+            ivResultsFilter = filterIVs(ivResultsFinal);
+            if (ivResultsFilter.size() > 0) {
+                Collections.sort(ivResultsFilter);
+                listener.onSuccessGuessingIV(ivResultsFilter);
+            }
+            else
+                listener.onFailGuessingIV();
+        }
+    }
+
+    public void updateManually(IOnIVDetailsFinishedListener listener) {
+        List<IVResult> ivResultsFilter;
 
         if (ivCalculatorModel.getCalculatorMode() == Constants.CALCULATOR_MODE_ARC)
             guessingIVsArcMode();
@@ -167,6 +188,10 @@ public class IVDetailsInteractor {
 
     public List<IVResult> getIvResultsFinal() {
         return ivResultsFinal;
+    }
+
+    public void setAutoCalcChecked(boolean autoCalcChecked) {
+        this.autoCalcChecked = autoCalcChecked;
     }
 
     public void setAttackCbChecked(boolean checked) {

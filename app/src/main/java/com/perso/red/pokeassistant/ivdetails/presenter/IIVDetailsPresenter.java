@@ -10,7 +10,7 @@ public interface IIVDetailsPresenter {
 
     void onCheckedChanged(int viewId, boolean isChecked);
 
-    void update();
+    void update(boolean manually);
 
     void filterIVs();
 }
