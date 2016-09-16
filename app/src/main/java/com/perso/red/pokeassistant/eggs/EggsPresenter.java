@@ -12,9 +12,9 @@ public class EggsPresenter implements Eggs.Presenter {
     private EggsView        view;
     private MainUiPresenter presenter;
 
-    public EggsPresenter(MainUiPresenter presenter, View layout) {
+    public EggsPresenter(MainUiPresenter presenter, View layout, boolean showMenuBtn) {
         this.presenter = presenter;
-        view = new EggsView(layout, this);
+        view = new EggsView(layout, this, showMenuBtn);
     }
 
     @Override

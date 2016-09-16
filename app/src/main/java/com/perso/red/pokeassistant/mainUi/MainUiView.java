@@ -3,19 +3,19 @@ package com.perso.red.pokeassistant.mainUi;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.perso.red.pokeassistant.R;
-import com.perso.red.pokeassistant.appraisal.AppraisalView;
-import com.perso.red.pokeassistant.ivcalculator.presenter.IVCalculatorPresenter;
-import com.perso.red.pokeassistant.service.MyService;
+import com.perso.red.pokeassistant.MyService;
+import com.perso.red.pokeassistant.models.ViewsSelected;
 import com.perso.red.pokeassistant.utils.Constants;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import info.hoang8f.widget.FButton;
 import jp.wasabeef.blurry.Blurry;
 
 /**
@@ -36,27 +36,11 @@ public class MainUiView implements MainUi.View {
 
     private boolean blurBg = false;
 
-    public MainUiView(MyService service, WindowManager windowManager) {
+    public MainUiView(MyService service, WindowManager windowManager, ViewsSelected viewsSelected) {
         context = service;
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             blurBg = true;
-
-        menuView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_menu, null);
-        ivCalculatorView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_iv_calculator, null);
-        eggsView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_eggs, null);
-        appraisalView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_appraisal, null);
-        xpCalculatorView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_experience_calculator, null);
-        evoCalculatorView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_evolution_calculator, null);
-        menuView.setVisibility(View.GONE);
-        ivCalculatorView.setVisibility(View.GONE);
-        eggsView.setVisibility(View.GONE);
-        appraisalView.setVisibility(View.GONE);
-        xpCalculatorView.setVisibility(View.GONE);
-        evoCalculatorView.setVisibility(View.GONE);
-
-        ButterKnife.bind(this, menuView);
-        presenter = new MainUiPresenter(service, this, windowManager);
 
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
@@ -65,47 +49,120 @@ public class MainUiView implements MainUi.View {
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN,
                 PixelFormat.TRANSLUCENT);
 
-        windowManager.addView(ivCalculatorView, params);
-        windowManager.addView(eggsView, params);
-        windowManager.addView(appraisalView, params);
-        windowManager.addView(xpCalculatorView, params);
-        windowManager.addView(evoCalculatorView, params);
-        windowManager.addView(menuView, params);
+        if (viewsSelected.isIvCalculator()) {
+            ivCalculatorView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_iv_calculator, null);
+            ivCalculatorView.setVisibility(View.GONE);
+            windowManager.addView(ivCalculatorView, params);
+        }
+        if (viewsSelected.isXpCalculator()) {
+            xpCalculatorView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_experience_calculator, null);
+            xpCalculatorView.setVisibility(View.GONE);
+            windowManager.addView(xpCalculatorView, params);
+        }
+        if (viewsSelected.isEvolutionCalculator()) {
+            evoCalculatorView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_evolution_calculator, null);
+            evoCalculatorView.setVisibility(View.GONE);
+            windowManager.addView(evoCalculatorView, params);
+        }
+        if (viewsSelected.isEggs()) {
+            eggsView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_eggs, null);
+            eggsView.setVisibility(View.GONE);
+            windowManager.addView(eggsView, params);
+        }
+        if (viewsSelected.isAppraisal()) {
+            appraisalView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_appraisal, null);
+            appraisalView.setVisibility(View.GONE);
+            windowManager.addView(appraisalView, params);
+        }
+        if (viewsSelected.size() > 1) {
+            int concreteColor = ContextCompat.getColor(service, info.hoang8f.fbutton.R.color.fbutton_color_concrete);
+            int asbestosColor = ContextCompat.getColor(service, info.hoang8f.fbutton.R.color.fbutton_color_asbestos);
+
+            menuView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.view_menu, null);
+            menuView.setVisibility(View.GONE);
+            windowManager.addView(menuView, params);
+
+            Button backBtn = (Button) menuView.findViewById(R.id.btn_back);
+            FButton ivCalcBtn = (FButton) menuView.findViewById(R.id.btn_iv_calculator);
+            FButton xpCalcBtn = (FButton) menuView.findViewById(R.id.btn_experience_calculator);
+            FButton evoCalcBtn = (FButton) menuView.findViewById(R.id.btn_evolution_calculator);
+            FButton eggsBtn = (FButton) menuView.findViewById(R.id.btn_eggs);
+            FButton appraisalBtn = (FButton) menuView.findViewById(R.id.btn_appraisal);
+
+            backBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.back();
+                }
+            });
+
+            if (viewsSelected.isIvCalculator()) {
+                ivCalcBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.showIvCalculator(ivCalculatorView);
+                    }
+                });
+            } else {
+                ivCalcBtn.setButtonColor(concreteColor);
+                ivCalcBtn.setShadowColor(asbestosColor);
+            }
+
+            if (viewsSelected.isXpCalculator()) {
+                xpCalcBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.showXPCalculator(xpCalculatorView);
+                    }
+                });
+            } else {
+                xpCalcBtn.setButtonColor(concreteColor);
+                xpCalcBtn.setShadowColor(asbestosColor);
+            }
+
+            if (viewsSelected.isEvolutionCalculator()) {
+                evoCalcBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.showEvoCalculator(evoCalculatorView);
+                    }
+                });
+            } else {
+                evoCalcBtn.setButtonColor(concreteColor);
+                evoCalcBtn.setShadowColor(asbestosColor);
+            }
+
+            if (viewsSelected.isEggs()) {
+                eggsBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.showEggs(eggsView);
+                    }
+                });
+            } else {
+                eggsBtn.setButtonColor(concreteColor);
+                eggsBtn.setShadowColor(asbestosColor);
+            }
+
+            if (viewsSelected.isAppraisal()) {
+                appraisalBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.showAppraisal(appraisalView);
+                    }
+                });
+            } else {
+                appraisalBtn.setButtonColor(concreteColor);
+                appraisalBtn.setShadowColor(asbestosColor);
+            }
+        }
+
+            presenter = new MainUiPresenter(service, this, windowManager, viewsSelected);
     }
 
     @Override
     public void setVisibility() {
         presenter.setVisibility();
-    }
-
-    @OnClick(R.id.btn_back)
-    public void OnClickBack() {
-        presenter.back();
-    }
-
-    @OnClick(R.id.btn_iv_calculator)
-    public void OnClickIvCalculator() {
-        presenter.showIvCalculator(ivCalculatorView);
-    }
-
-    @OnClick(R.id.btn_eggs)
-    public void OnClickEggs() {
-        presenter.showEggs(eggsView);
-    }
-
-    @OnClick(R.id.btn_appraisal)
-    public void OnClickAppraisal() {
-        presenter.showAppraisal(appraisalView);
-    }
-
-    @OnClick(R.id.btn_experience_calculator)
-    public void OnClickXPCalculator() {
-        presenter.showXPCalculator(xpCalculatorView);
-    }
-
-    @OnClick(R.id.btn_evolution_calculator)
-    public void OnClickEvoCalculator() {
-        presenter.showEvoCalculator(evoCalculatorView);
     }
 
     public ViewGroup getViewGroup(int id) {
@@ -144,17 +201,26 @@ public class MainUiView implements MainUi.View {
 
     @Override
     public void removeView(WindowManager windowManager) {
-        windowManager.removeView(ivCalculatorView);
-        windowManager.removeView(eggsView);
-        windowManager.removeView(appraisalView);
-        windowManager.removeView(xpCalculatorView);
-        windowManager.removeView(evoCalculatorView);
-        windowManager.removeView(menuView);
-        windowManager.removeView(presenter.getMyArcPointer());
+        if (ivCalculatorView != null)
+            windowManager.removeView(ivCalculatorView);
+        if (eggsView != null)
+            windowManager.removeView(eggsView);
+        if (appraisalView != null)
+            windowManager.removeView(appraisalView);
+        if (xpCalculatorView != null)
+            windowManager.removeView(xpCalculatorView);
+        if (evoCalculatorView != null)
+            windowManager.removeView(evoCalculatorView);
+        if (menuView != null)
+            windowManager.removeView(menuView);
+        if (ivCalculatorView != null)
+            windowManager.removeView(presenter.getMyArcPointer());
     }
 
     public String getTrainerLvl() {
-        return presenter.getTrainerLvl();
+        if (ivCalculatorView != null)
+            return presenter.getTrainerLvl();
+        return "";
     }
 
     public ViewGroup getMenuView() {

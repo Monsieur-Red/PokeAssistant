@@ -18,10 +18,10 @@ public class EvoCalculatorPresenter implements EvoCalculator.Presenter, EvoCalcu
     private EvoCalculatorInteractor interactor;
     private MainUiPresenter         mainUiPresenter;
 
-    public EvoCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, ModelManager modelManager) {
+    public EvoCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, ModelManager modelManager, boolean showMenuBtn) {
         this.mainUiPresenter = mainUiPresenter;
         interactor = new EvoCalculatorInteractor(modelManager);
-        view = new EvoCalculatorView(layout, this);
+        view = new EvoCalculatorView(layout, this, showMenuBtn);
     }
 
     @Override

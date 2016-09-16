@@ -88,15 +88,18 @@ public class IVDetailsInteractor {
         List<Double>    pokemonLevels = dustToLevel.getPokemonLvl(ivCalculatorModel.getPokemonDust());
 
         ivResultsFinal = new ArrayList<>();
-        for (int i = 0; i < pokemonLevels.size(); i++) {
+        int i = 0;
+//        for (int i = 0; i < pokemonLevels.size(); i++) {
+        for (double pokemonLevel : pokemonLevels) {
             if (ivCalculatorModel.isPoweredUp() || (!ivCalculatorModel.isPoweredUp() && i % 2 == 0)) {
-                double pokemonLevel = pokemonLevels.get(i);
+//                double pokemonLevel = pokemonLevels.get(i);
                 List<IVResult> ivResults = new ArrayList<>();
                 double cpm = Constants.CpM[Tools.convertLevelToIndex(pokemonLevel)];
                 List<Integer> staminaIVS = getStaminaIVs(ivCalculatorModel.getPokemonHp(), staminaBase, cpm);
 
                 // Get Attack Iv
-                for (int ivDefense = 0; ivDefense <= 15; ivDefense++) {
+//                for (int ivDefense = 0; ivDefense <= 15; ivDefense++) {
+                for (int ivDefense = 0; ivDefense <= 15; ++ivDefense) {
                     for (int staminaIV : staminaIVS) {
                         int ivAttack = (int) Math.ceil(cp / ((Math.pow(defenseBase + ivDefense, 0.5) * Math.pow(staminaBase + staminaIV, 0.5) * Math.pow(cpm, 2) / 10)) - attackBase);
 
@@ -112,6 +115,7 @@ public class IVDetailsInteractor {
                         ivResultsFinal.add(result);
                 }
             }
+            i++;
         }
     }
 
@@ -129,7 +133,8 @@ public class IVDetailsInteractor {
         ivResultsFinal = new ArrayList<>();
 
         // Get Attack Iv
-        for (int ivDefense = 0; ivDefense <= 15; ivDefense++) {
+//        for (int ivDefense = 0; ivDefense <= 15; ivDefense++) {
+        for (int ivDefense = 0; ivDefense <= 15; ++ivDefense) {
             for (int staminaIV : staminaIVS) {
                 int ivAttack = (int)Math.ceil(cp / ((Math.pow(defenseBase + ivDefense, 0.5) * Math.pow(staminaBase + staminaIV, 0.5) * Math.pow(cpm, 2) / 10)) - attackBase);
 
@@ -148,6 +153,7 @@ public class IVDetailsInteractor {
 
     private List<Integer>   getStaminaIVs(int hp, int staminaBase, double cpm) {
         List<Integer>   staminaIVs = new ArrayList<>();
+
         for (int i = 0; i <= 15; i++) {
             double result = Math.floor((staminaBase + i) * cpm);
 

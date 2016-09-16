@@ -14,10 +14,6 @@ import android.widget.TextView;
 
 import com.perso.red.pokeassistant.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
  * Created by pierr on 09/09/2016.
  */
@@ -27,15 +23,16 @@ public class PokedexView implements Pokedex.View {
     private View                view;
     private PokedexPresenter presenter;
 
-    @BindView(R.id.text_view_pokemon_name)  TextView        pokemonName;
-    @BindView(R.id.view_pokemons_names)     LinearLayout    pokemonsNames;
+//    @BindView(R.id.text_view_pokemon_name)  TextView        pokemonName;
+//    @BindView(R.id.view_pokemons_names)     LinearLayout    pokemonsNames;
 
     public PokedexView(View view, PokedexPresenter presenter) {
         this.view = view;
         this.presenter = presenter;
-        ButterKnife.bind(this, view);
+//        ButterKnife.bind(this, view);
     }
 
+/*
     private void initPokemonName() {
         final EditText search = ButterKnife.findById(pokemonsNames, R.id.edit_text_search);
         ListView listView = ButterKnife.findById(pokemonsNames, R.id.list_view_pokemons_names);
@@ -107,6 +104,7 @@ public class PokedexView implements Pokedex.View {
     public void OnClickMenu() {
         presenter.showMenu();
     }
+*/
 
 
 }

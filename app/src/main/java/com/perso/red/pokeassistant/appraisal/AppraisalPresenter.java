@@ -13,9 +13,9 @@ public class AppraisalPresenter implements Appraisal.Presenter {
     private AppraisalView   view;
     private MainUiPresenter mainUiPresenter;
 
-    public AppraisalPresenter(MainUiPresenter mainUiPresenter, View layout) {
+    public AppraisalPresenter(MainUiPresenter mainUiPresenter, View layout, boolean showMenuBtn) {
         this.mainUiPresenter = mainUiPresenter;
-        view = new AppraisalView(layout, this);
+        view = new AppraisalView(layout, this, showMenuBtn);
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.perso.red.pokeassistant.xpcalculator;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +17,6 @@ import com.perso.red.pokeassistant.models.XPCalculatorPokemon;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnTextChanged;
 
 /**
  * Created by pierr on 10/09/2016.
@@ -34,60 +32,90 @@ public class XPCalculatorRVAdpater extends RecyclerView.Adapter<XPCalculatorRVAd
         pokemons = new ArrayList<>();
     }
 
-    public class DataObjectHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.name)        TextView    name;
-        @BindView(R.id.amount)      EditText    amount;
-        @BindView(R.id.candy)       EditText    candy;
-        @BindView(R.id.btn_delete)  ImageButton delete;
+    public class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView    name;
+        EditText    amount;
+        EditText    candy;
+        ImageButton delete;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
+            name = (TextView) itemView.findViewById(R.id.name);
+            amount = (EditText) itemView.findViewById(R.id.amount);
+            candy = (EditText) itemView.findViewById(R.id.candy);
+            delete = (ImageButton) itemView.findViewById(R.id.btn_delete);
 
-        @OnTextChanged(R.id.amount)
-        public void OnTextChangedAmount(CharSequence text) {
-            if (!TextUtils.isEmpty(text)) {
-                XPCalculatorPokemon pokemon = pokemons.get(getAdapterPosition());
-                int number = Integer.valueOf(text.toString());
+            amount.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                if (number > 100000) {
-                    amount.setText(new StringBuilder("100000"));
-                    pokemon.setAmount(100000);
                 }
-                else
-                    pokemon.setAmount(number);
-            }
 
-            if (!TextUtils.isEmpty(text) && !TextUtils.isEmpty(candy.getText()))
-                presenter.update(pokemons);
-            else
-                presenter.hideResult();
-        }
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (!TextUtils.isEmpty(charSequence)) {
+                        XPCalculatorPokemon pokemon = pokemons.get(getAdapterPosition());
+                        int number = Integer.valueOf(charSequence.toString());
 
-        @OnTextChanged(R.id.candy)
-        public void OnTextChangedCandy(CharSequence text) {
-            if (!TextUtils.isEmpty(text)) {
-                XPCalculatorPokemon pokemon = pokemons.get(getAdapterPosition());
-                int number = Integer.valueOf(text.toString());
+                        if (number > 100000) {
+                            amount.setText(new StringBuilder("100000"));
+                            pokemon.setAmount(100000);
+                        }
+                        else
+                            pokemon.setAmount(number);
+                    }
 
-                if (number > 100000) {
-                    candy.setText(new StringBuilder("100000"));
-                    pokemon.setCandy(100000);
+                    if (!TextUtils.isEmpty(charSequence) && !TextUtils.isEmpty(candy.getText()))
+                        presenter.update(pokemons);
+                    else
+                        presenter.hideResult();
                 }
-                else
-                    pokemon.setCandy(number);
-            }
 
-            if (!TextUtils.isEmpty(text) && !TextUtils.isEmpty(amount.getText()))
-                presenter.update(pokemons);
-            else
-                presenter.hideResult();
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            candy.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (!TextUtils.isEmpty(charSequence)) {
+                        XPCalculatorPokemon pokemon = pokemons.get(getAdapterPosition());
+                        int number = Integer.valueOf(charSequence.toString());
+
+                        if (number > 100000) {
+                            candy.setText(new StringBuilder("100000"));
+                            pokemon.setCandy(100000);
+                        }
+                        else
+                            pokemon.setCandy(number);
+                    }
+
+                    if (!TextUtils.isEmpty(charSequence) && !TextUtils.isEmpty(amount.getText()))
+                        presenter.update(pokemons);
+                    else
+                        presenter.hideResult();
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+            delete.setOnClickListener(this);
         }
 
-        @OnClick(R.id.btn_delete)
-        public void OnClickDelete() {
-            remove(getAdapterPosition());
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.btn_delete)
+                remove(getAdapterPosition());
         }
     }
 
@@ -100,7 +128,7 @@ public class XPCalculatorRVAdpater extends RecyclerView.Adapter<XPCalculatorRVAd
     }
 
     @Override
-    public void onBindViewHolder(DataObjectHolder holder, int position) {
+    public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         XPCalculatorPokemon pokemon = pokemons.get(position);
 
         holder.name.setText(pokemon.getName());

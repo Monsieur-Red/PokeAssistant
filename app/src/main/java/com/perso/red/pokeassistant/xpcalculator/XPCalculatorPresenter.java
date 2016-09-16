@@ -21,10 +21,10 @@ public class XPCalculatorPresenter implements XPCalculator.Presenter, XPCalculat
     private XPCalculatorInteractor  interactor;
     private MainUiPresenter         mainUiPresenter;
 
-    public XPCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, ModelManager modelManager) {
+    public XPCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, ModelManager modelManager, boolean showMenuBtn) {
         this.mainUiPresenter = mainUiPresenter;
         interactor = new XPCalculatorInteractor(modelManager);
-        view = new XPCalculatorView(layout, this);
+        view = new XPCalculatorView(layout, this, showMenuBtn);
     }
 
 

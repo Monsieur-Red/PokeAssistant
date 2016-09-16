@@ -386,15 +386,14 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1" />
 
-        <com.rey.material.widget.CheckBox
+        <CheckBox
             android:id="@+id/checkbox_pokemon_powered_up"
-            style="@style/Material.Drawable.CheckBox"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.3"
 
+            android:theme="@style/MyCheckBox"
             android:gravity="center"
-            app:cbd_strokeColor="@color/fbutton_color_turquoise"
             android:text="@string/powered_up"
             android:textSize="14sp"
             android:textColor="@color/primary_text"

@@ -27,10 +27,10 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
     private IVDetailsPresenter  ivDetailsPresenter;
     private MovePresenter       movePresenter;
 
-    public IVCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, WindowManager windowManager) {
+    public IVCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, WindowManager windowManager, boolean showMenuBtn) {
         this.mainUiPresenter = mainUiPresenter;
         interactor = new IVCalculatorInteractor(layout.getContext().getAssets());
-        view = new IVCalculatorView(layout, windowManager, this);
+        view = new IVCalculatorView(layout, windowManager, this, showMenuBtn);
         ivDetailsPresenter = new IVDetailsPresenter(layout.findViewById(R.id.view_iv_details), this, interactor.getIvCalculatorModel());
         movePresenter = new MovePresenter(layout.findViewById(R.id.view_moves));
         checkTrainerLvlSave(layout.getContext());

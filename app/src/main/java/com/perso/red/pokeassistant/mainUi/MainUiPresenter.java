@@ -11,6 +11,7 @@ import com.perso.red.pokeassistant.eggs.EggsPresenter;
 import com.perso.red.pokeassistant.evocalculator.EvoCalculatorPresenter;
 import com.perso.red.pokeassistant.ivcalculator.presenter.IVCalculatorPresenter;
 import com.perso.red.pokeassistant.models.ModelManager;
+import com.perso.red.pokeassistant.models.ViewsSelected;
 import com.perso.red.pokeassistant.utils.Constants;
 import com.perso.red.pokeassistant.xpcalculator.XPCalculatorPresenter;
 
@@ -21,28 +22,41 @@ import com.perso.red.pokeassistant.xpcalculator.XPCalculatorPresenter;
 public class MainUiPresenter implements MainUi.Presenter {
 
     private MainUiView              view;
-    private ModelManager            modelManager;
     private IVCalculatorPresenter   ivCalculatorPresenter;
-    private EggsPresenter           eggsPresenter;
-    private AppraisalPresenter      appraisalPresenter;
-    private XPCalculatorPresenter   xpCalculatorPresenter;
-    private EvoCalculatorPresenter  evoCalculatorPresenter;
 
     private boolean display;
     private int     oldViewId;
     private int     currentViewId;
 
-    public MainUiPresenter(Context context, MainUiView view, WindowManager windowManager) {
+    public MainUiPresenter(Context context, MainUiView view, WindowManager windowManager, ViewsSelected viewsSelected) {
         this.view = view;
-        modelManager = new ModelManager(context.getAssets());
-        ivCalculatorPresenter = new IVCalculatorPresenter(this, view.getIvCalculatorView(), windowManager);
-        eggsPresenter = new EggsPresenter(this, view.getEggsView());
-        appraisalPresenter = new AppraisalPresenter(this, view.getAppraisalView());
-        xpCalculatorPresenter = new XPCalculatorPresenter(this, view.getXpCalculatorView(), modelManager);
-        evoCalculatorPresenter = new EvoCalculatorPresenter(this, view.getEvoCalculatorView(), modelManager);
+        ModelManager modelManager = new ModelManager(context.getAssets());
+
+        if (viewsSelected.isIvCalculator())
+            ivCalculatorPresenter = new IVCalculatorPresenter(this, view.getIvCalculatorView(), windowManager, viewsSelected.size() > 1);
+        if (viewsSelected.isXpCalculator())
+            new XPCalculatorPresenter(this, view.getXpCalculatorView(), modelManager, viewsSelected.size() > 1);
+        if (viewsSelected.isEvolutionCalculator())
+            new EvoCalculatorPresenter(this, view.getEvoCalculatorView(), modelManager, viewsSelected.size() > 1);
+        if (viewsSelected.isEggs())
+            new EggsPresenter(this, view.getEggsView(), viewsSelected.size() > 1);
+        if (viewsSelected.isAppraisal())
+            new AppraisalPresenter(this, view.getAppraisalView(), viewsSelected.size() > 0);
         display = false;
         oldViewId = Constants.VIEW_NONE;
-        currentViewId = Constants.VIEW_IV_CALC;
+
+        if (viewsSelected.isIvCalculator())
+            currentViewId = Constants.VIEW_IV_CALC;
+        else if (viewsSelected.isXpCalculator())
+            currentViewId = Constants.VIEW_XP_CALC;
+        else if (viewsSelected.isEvolutionCalculator())
+            currentViewId = Constants.VIEW_EVO_CALC;
+        else if (viewsSelected.isXpCalculator())
+            currentViewId = Constants.VIEW_XP_CALC;
+        else if (viewsSelected.isEggs())
+            currentViewId = Constants.VIEW_EGGS;
+        else if (viewsSelected.isAppraisal())
+            currentViewId = Constants.VIEW_APPRAISAL;
     }
 
     @Override

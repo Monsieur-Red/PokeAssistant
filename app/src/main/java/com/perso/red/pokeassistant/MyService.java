@@ -1,4 +1,4 @@
-package com.perso.red.pokeassistant.service;
+package com.perso.red.pokeassistant;
 
 import android.app.Service;
 import android.content.Context;
@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.perso.red.pokeassistant.R;
 import com.perso.red.pokeassistant.mainUi.MainUiView;
+import com.perso.red.pokeassistant.models.ViewsSelected;
+import com.perso.red.pokeassistant.utils.Constants;
 import com.perso.red.pokeassistant.utils.Tools;
 
 import jp.co.recruit_lifestyle.android.floatingview.FloatingViewListener;
@@ -33,12 +34,13 @@ public class MyService extends Service implements FloatingViewListener {
 
     @Override public void onCreate() {
         super.onCreate();
-        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-        mainUiView = new MainUiView(this, windowManager);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        mainUiView = new MainUiView(this, windowManager, (ViewsSelected) intent.getExtras().get(Constants.VIEW_SELECTED));
+
         if (mFloatingViewManager != null)
             return START_STICKY;
 

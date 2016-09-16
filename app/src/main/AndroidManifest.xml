@@ -8,8 +8,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
+        android:theme="@style/AppTheme">
+        <!--android:largeHeap="true">-->
 
         <activity
             android:name=".MainActivity"
@@ -23,7 +23,7 @@
 
         </activity>
 
-        <service android:enabled="true" android:name=".service.MyService" />
+        <service android:enabled="true" android:name=".MyService" />
 
     </application>
 

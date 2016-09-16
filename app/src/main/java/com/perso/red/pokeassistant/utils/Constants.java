@@ -64,4 +64,12 @@ public class Constants {
     public static final int VIEW_XP_CALC = 5;
     public static final int VIEW_APPRAISAL = 6;
 
+    public static final String LAUNCH_MODE = "launch mode";
+    public static final String VIEW_SELECTED = "views selected";
+    public static final String VIEW_SELECTED_IV_CALC = "iv calculator selected";
+    public static final String VIEW_SELECTED_XP_CALC = "xp calculator selected";
+    public static final String VIEW_SELECTED_EVO_CALC = "evo calculator selected";
+    public static final String VIEW_SELECTED_EGGS = "eggs selected";
+    public static final String VIEW_SELECTED_APPRAISAL = "appraisal selected";
+
 }

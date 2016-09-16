@@ -4,11 +4,15 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,11 +21,6 @@ import com.perso.red.pokeassistant.models.XPCalculatorPokemon;
 
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
-import butterknife.OnEditorAction;
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
@@ -33,32 +32,33 @@ public class XPCalculatorView implements XPCalculator.View {
 
     private XPCalculatorPresenter   presenter;
 
-    @BindView(R.id.edit_text_pokemon_name)
-    AutoCompleteTextView    pokemonName;
-    @BindView(R.id.recycler_view)
-    RecyclerView    recyclerView;
-    @BindView(R.id.container_result)
-    LinearLayout resultContainer;
-    @BindView(R.id.experience)
-    TextView experience;
-    @BindView(R.id.time)
-    TextView time;
-    @BindView(R.id.transfert_before_evolving)
-    TextView transfertBeforeEvolving;
-    @BindView(R.id.activate_your_lucky_egg)
-    TextView activateYourLuckyEgg;
-    @BindView(R.id.transfert_result)
-    TextView transfertResult;
-    @BindView(R.id.evolve_result)
-    TextView evolveResult;
-
     private InputMethodManager      inputMethodManager;
     private LinearLayoutManager     linearLayoutManager;
     private XPCalculatorRVAdpater   adapter;
+    private LinearLayout            resultContainer;
+    private TextView                experience;
+    private TextView                time;
+    private TextView                transfertBeforeEvolving;
+    private TextView                activateYourLuckyEgg;
+    private TextView                transfertResult;
+    private TextView                evolveResult;
 
-    public XPCalculatorView(View view, XPCalculatorPresenter presenter) {
+    public XPCalculatorView(View view, final XPCalculatorPresenter presenter, boolean showMenuBtn) {
         this.presenter = presenter;
-        ButterKnife.bind(this, view);
+
+        Button                  menuBtn = (Button) view.findViewById(R.id.btn_menu);
+        final AutoCompleteTextView    pokemonName = (AutoCompleteTextView) view.findViewById(R.id.edit_text_pokemon_name);
+        RecyclerView            recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        resultContainer = (LinearLayout) view.findViewById(R.id.container_result);
+        experience = (TextView) view.findViewById(R.id.experience);
+        time = (TextView) view.findViewById(R.id.time);
+        transfertBeforeEvolving = (TextView) view.findViewById(R.id.transfert_before_evolving);
+        activateYourLuckyEgg = (TextView) view.findViewById(R.id.activate_your_lucky_egg);
+        transfertResult = (TextView) view.findViewById(R.id.transfert_result);
+        evolveResult = (TextView) view.findViewById(R.id.evolve_result);
+        final Button                  addBtn = (Button) view.findViewById(R.id.btn_add);
+        CheckBox                luckyEggCb = (CheckBox) view.findViewById(R.id.checkbox_lucky_egg);
+
         inputMethodManager = (InputMethodManager)view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         pokemonName.setAdapter(new ArrayAdapter<>(view.getContext(), R.layout.autocompletetextview_dropdown_item, presenter.getPokemonNamesWithEvolution()));
@@ -71,43 +71,57 @@ public class XPCalculatorView implements XPCalculator.View {
 
         resultContainer.setVisibility(View.GONE);
         activateYourLuckyEgg.setVisibility(View.GONE);
-    }
 
-    @OnClick(R.id.btn_menu)
-    public void OnClickMenu() {
-        presenter.showMenu();
-    }
-
-    @OnEditorAction(R.id.edit_text_pokemon_name)
-    public boolean OnEditorActionPokemonName(int actionId) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-            OnClickAdd();
-            return true;
-        }
-        return false;
-    }
-
-    @OnClick(R.id.btn_add)
-    public void OnClickAdd() {
-        String  pokemon = pokemonName.getText().toString();
-
-        if (!TextUtils.isEmpty(pokemon) && presenter.checkPokemonName(pokemon)) {
-            adapter.add(new XPCalculatorPokemon(pokemon));
-            linearLayoutManager.scrollToPositionWithOffset(0, 0);
+        if (!showMenuBtn)
+            menuBtn.setVisibility(View.INVISIBLE);
+        else {
+            menuBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.showMenu();
+                }
+            });
         }
 
-        pokemonName.setText("");
-        inputMethodManager.hideSoftInputFromWindow(pokemonName.getWindowToken(), 0);
+        pokemonName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    addBtn.callOnClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String  pokemon = pokemonName.getText().toString();
+
+                if (!TextUtils.isEmpty(pokemon) && presenter.checkPokemonName(pokemon)) {
+                    adapter.add(new XPCalculatorPokemon(pokemon));
+                    linearLayoutManager.scrollToPositionWithOffset(0, 0);
+                }
+
+                pokemonName.setText("");
+                inputMethodManager.hideSoftInputFromWindow(pokemonName.getWindowToken(), 0);
+            }
+        });
+
+        luckyEggCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked)
+                    presenter.setLuckyEgg(true);
+                else
+                    presenter.setLuckyEgg(false);
+                presenter.update(adapter.getPokemons());
+            }
+        });
+
     }
 
-    @OnCheckedChanged(R.id.checkbox_lucky_egg)
-    public void OnCheckedChangedLuckyEgg(boolean isChecked) {
-        if (isChecked)
-            presenter.setLuckyEgg(true);
-        else
-            presenter.setLuckyEgg(false);
-        presenter.update(adapter.getPokemons());
-    }
 
     @Override
     public void setResult(int experience, int time, boolean luckyEgg, String transfert, String evolve) {

@@ -13,10 +13,6 @@ import com.perso.red.pokeassistant.models.EvoCalculatorPokemon;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 /**
  * Created by pierr on 11/09/2016.
  */
@@ -31,20 +27,25 @@ public class EvoCalculatorRVAdapter extends RecyclerView.Adapter<EvoCalculatorRV
         pokemons = new ArrayList<>();
     }
 
-    public class DataObjectHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.pokemon)     TextView pokemon;
-        @BindView(R.id.cp)          TextView cp;
-        @BindView(R.id.max_cp)      TextView maxCp;
-        @BindView(R.id.btn_delete)  ImageButton delete;
+    public class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView    pokemon;
+        TextView    cp;
+        TextView    maxCp;
+        ImageButton delete;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            pokemon = (TextView) itemView.findViewById(R.id.pokemon);
+            cp = (TextView) itemView.findViewById(R.id.cp);
+            maxCp = (TextView) itemView.findViewById(R.id.max_cp);
+            delete = (ImageButton) itemView.findViewById(R.id.btn_delete);
+            delete.setOnClickListener(this);
         }
 
-        @OnClick(R.id.btn_delete)
-        public void OnClickDelete() {
-            remove(getAdapterPosition());
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.btn_delete)
+                remove(getAdapterPosition());
         }
     }
 

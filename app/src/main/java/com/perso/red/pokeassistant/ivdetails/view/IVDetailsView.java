@@ -15,10 +15,6 @@ import com.perso.red.pokeassistant.models.IVResult;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-
 /**
  * Created by pierr on 19/08/2016.
  */
@@ -26,55 +22,69 @@ import butterknife.OnCheckedChanged;
 public class IVDetailsView implements IIVDetailsView {
 
     private View                view;
-    private IVDetailsPresenter  presenter;
 
-    @BindView(R.id.text_view_team_leader_result_analysis)TextView       leaderRA;
-    @BindView(R.id.text_view_no_combinations)           TextView        noCombinations;
-    @BindView(R.id.checkbox_attack)                     CheckBox        attackCheckBox;
-    @BindView(R.id.checkbox_defense)                    CheckBox        defenseCheckBox;
-    @BindView(R.id.checkbox_stamina)                    CheckBox        staminaCheckBox;
-    @BindView(R.id.view_iv_details_tab_iv)              LinearLayout    tabIVs;
-    @BindView(R.id.view_iv_details_tab_titles)          LinearLayout    tabTitles;
-    @BindView(R.id.text_view_iv_details_min)            TextView        minIV;
-    @BindView(R.id.text_view_iv_details_average)        TextView        averageIV;
-    @BindView(R.id.text_view_iv_details_max)            TextView        maxIV;
-    @BindView(R.id.recycler_view_iv_details)            RecyclerView    recyclerView;
+    private TextView        noCombinations;
+    private LinearLayout    tabIVs;
+    private LinearLayout    tabTitles;
+    private TextView        minIV;
+    private TextView        averageIV;
+    private TextView        maxIV;
+    private RecyclerView    recyclerView;
 
     private IVDetailsRVAdapter  adapter;
 
     public IVDetailsView(View view, final IVDetailsPresenter presenter) {
         this.view = view;
-        this.presenter = presenter;
-        ButterKnife.bind(this, view);
+
+        final TextView leaderRA = (TextView) view.findViewById(R.id.text_view_team_leader_result_analysis);
+        noCombinations = (TextView) view.findViewById(R.id.text_view_no_combinations);
+        CheckBox autoCalculateCheckBox = (CheckBox) view.findViewById(R.id.checkbox_auto_calculate);
+        CheckBox attackCheckBox = (CheckBox) view.findViewById(R.id.checkbox_attack);
+        CheckBox defenseCheckBox = (CheckBox) view.findViewById(R.id.checkbox_defense);
+        CheckBox staminaCheckBox = (CheckBox) view.findViewById(R.id.checkbox_stamina);
+        tabIVs = (LinearLayout) view.findViewById(R.id.view_iv_details_tab_iv);
+        tabTitles = (LinearLayout) view.findViewById(R.id.view_iv_details_tab_titles);
+        minIV = (TextView) view.findViewById(R.id.text_view_iv_details_min);
+        averageIV = (TextView) view.findViewById(R.id.text_view_iv_details_average);
+        maxIV = (TextView) view.findViewById(R.id.text_view_iv_details_max);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
         adapter = new IVDetailsRVAdapter();
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
-    }
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-    @OnCheckedChanged(R.id.checkbox_auto_calculate)
-    public void OnCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked)
-            leaderRA.setVisibility(View.VISIBLE);
-        else
-            leaderRA.setVisibility(View.GONE);
+        autoCalculateCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked)
+                    leaderRA.setVisibility(View.VISIBLE);
+                else
+                    leaderRA.setVisibility(View.GONE);
 
-        presenter.onCheckedChanged(buttonView.getId(), isChecked);
-    }
+                presenter.onCheckedChanged(compoundButton.getId(), isChecked);
+            }
+        });
 
-    @OnCheckedChanged(R.id.checkbox_attack)
-    public void onAttCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        presenter.onCheckedChanged(buttonView.getId(), isChecked);
-    }
+        attackCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                presenter.onCheckedChanged(compoundButton.getId(), isChecked);
+            }
+        });
 
-    @OnCheckedChanged(R.id.checkbox_defense)
-    public void onDefCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        presenter.onCheckedChanged(buttonView.getId(), isChecked);
-    }
+        defenseCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                presenter.onCheckedChanged(compoundButton.getId(), isChecked);
+            }
+        });
 
-    @OnCheckedChanged(R.id.checkbox_stamina)
-    public void onStaCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        presenter.onCheckedChanged(buttonView.getId(), isChecked);
+        staminaCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                presenter.onCheckedChanged(compoundButton.getId(), isChecked);
+            }
+        });
     }
 
     @Override
