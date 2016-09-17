@@ -16,6 +16,7 @@
     <string name="appraisal_guide">Évaluation Des Chefs d\'Équipe</string>
     <string name="experience_calculator">Calculateur XP</string>
     <string name="evolution_calculator">Calculateur Évolution</string>
+    <string name="buddies">Copains</string>
 
     <!-- IV Calculator -->
     <string name="trainer_lvl">Niveau\nDresseur</string>
@@ -28,6 +29,7 @@
     <string name="stardust">Poussière d\'étoiles</string>
     <string name="powered_up">Recharger?</string>
     <string name="calculate">Calculer</string>
+    <string name="dialog_iv_calculator">Ton niveau de dresseur est 0!</string>
 
     <!-- IV Details -->
     <string name="iv">IV</string>

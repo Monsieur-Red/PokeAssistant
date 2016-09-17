@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="14%"
+        app:layout_widthPercent="54%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginLeftPercent="20%"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/background_edit_text_round">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <CheckBox
+                android:id="@+id/checkbox_buddies_1km"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:checked="true"
+                android:theme="@style/MyCheckBox"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/buddy_1km"
+                android:textSize="14sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+            <CheckBox
+                android:id="@+id/checkbox_buddies_3km"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:theme="@style/MyCheckBox"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/buddy_3km"
+                android:textSize="14sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <CheckBox
+                android:id="@+id/checkbox_buddies_5km"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:theme="@style/MyCheckBox"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/buddy_5km"
+                android:textSize="14sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+            <CheckBox
+                android:id="@+id/checkbox_buddies_unknown_km"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:theme="@style/MyCheckBox"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/buddy_unknown_km"
+                android:textSize="14sp"
+                android:textColor="@color/primary_text"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btn_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="18%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginRightPercent="4%"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/menu"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+
+        fbutton:buttonColor="@color/fbutton_color_turquoise"
+        fbutton:shadowColor="@color/fbutton_color_green_sea"
+        fbutton:shadowEnabled="true"
+        fbutton:shadowHeight="5dp"
+        fbutton:cornerRadius="5dp" />
+
+    <TextView
+        android:id="@+id/credits"
+        android:layout_below="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="54%"
+        app:layout_marginTopPercent="2%"
+        app:layout_marginLeftPercent="20%"
+        android:padding="10dp"
+
+        android:gravity="center"
+        android:text="@string/credits_silphroad"
+        android:textColor="@color/primary_text"
+        android:textSize="14sp"
+        android:singleLine="false"
+        android:background="@drawable/background_edit_text_round"/>
+
+    <ScrollView
+        android:layout_below="@+id/credits"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="100%"
+        app:layout_widthPercent="100%"
+        app:layout_marginPercent="2%"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <at.blogc.android.views.ExpandableTextView
+                android:id="@+id/expandableTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+
+                android:text="@string/eggs_info_source"
+                android:textColor="@color/primary_text"
+                android:textSize="15sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:animation_duration="500"
+                android:background="@drawable/background_edit_text_round"
+                android:visibility="gone"/>
+
+            <info.hoang8f.widget.FButton
+                android:id="@+id/btn_expand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+
+                android:text="@string/expand"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:textAllCaps="false"
+
+                fbutton:buttonColor="@color/fbutton_color_turquoise"
+                fbutton:shadowColor="@color/fbutton_color_green_sea"
+                fbutton:shadowEnabled="true"
+                fbutton:shadowHeight="5dp"
+                fbutton:cornerRadius="5dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</android.support.percent.PercentRelativeLayout>

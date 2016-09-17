@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Poke Assistant</string>
+    <string name="app_name" translatable="false">Pika Assistant</string>
     <string name="msg_permission">You must enable the permission \"Draw over other apps\" for Poke Assistant in order to run.\n\nSelect Poke Assistant Application then permit drawing over other apps.\n\nEnjoy!</string>
 
     <!-- SharedPreferences -->
@@ -21,6 +21,7 @@
     <string name="appraisal_guide">Team Leader Appraisal Analysis</string>
     <string name="experience_calculator">XP Calculator</string>
     <string name="evolution_calculator">Evolution Calculator</string>
+    <string name="buddies">Buddies</string>
 
     <!-- IV Calculator -->
     <string name="trainer_lvl">Trainer\nLVL</string>
@@ -55,6 +56,7 @@
     </string-array>
     <string name="powered_up">Powered up?</string>
     <string name="calculate">Calculate</string>
+    <string name="dialog_iv_calculator">Your trainer lvl is 0!</string>
 
     <!-- IV Details -->
     <string name="iv">IV</string>
@@ -85,6 +87,13 @@
         \n-5000-5999 steps (the majority of Pokemon) are 5 KM eggs
         \n-6000 and more steps becomes a 10 KM egg
         \n\n(More information -> pokemongohub!!)</string>
+
+    <!-- Buddies -->
+    <string name="buddy_1km" translatable="false">1km</string>
+    <string name="buddy_3km" translatable="false">3km</string>
+    <string name="buddy_5km" translatable="false">5km</string>
+    <string name="buddy_unknown_km" translatable="false">\??</string>
+    <string name="credits_silphroad" translatable="false">Credits : Pokemon GO Tools | The Silph Road</string>
 
     <!-- Appraisal-->
     <string name="instinct">Instinct</string>
