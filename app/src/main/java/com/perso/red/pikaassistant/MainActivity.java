@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.perso.red.pikaassistant.models.ViewsSelected;
 import com.perso.red.pikaassistant.utils.Constants;
 import com.perso.red.pikaassistant.utils.Tools;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int OVERLAY_PERMISSION_REQ_CODE = 1234;
 
+    private AdView mAdView;
     private SharedPreferences.Editor editor;
 
     private ViewsSelected   viewsSelected;
@@ -39,6 +42,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+/*
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+                System.out.println("*********************************CLOSED");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+                System.out.println("*********************************FAILED : " + i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+                System.out.println("*********************************LEFT");
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+                System.out.println("*********************************OPENED");
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                System.out.println("*********************************LOAD");
+            }
+        });
+*/
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPref.edit();
@@ -176,6 +217,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        if (mAdView != null)
+            mAdView.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null)
+            mAdView.resume();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null)
+            mAdView.destroy();
+        super.onDestroy();
     }
 
     private boolean checkPermissions() {

@@ -34,7 +34,7 @@ public class MainUiPresenter implements MainUi.Presenter {
         ModelManager modelManager = new ModelManager(context.getAssets());
 
         if (viewsSelected.isIvCalculator())
-            ivCalculatorPresenter = new IVCalculatorPresenter(this, view.getIvCalculatorView(), windowManager, viewsSelected.size() > 1);
+            ivCalculatorPresenter = new IVCalculatorPresenter(this, view.getIvCalculatorView(), windowManager, modelManager, viewsSelected.size() > 1);
         if (viewsSelected.isXpCalculator())
             new XPCalculatorPresenter(this, view.getXpCalculatorView(), modelManager, viewsSelected.size() > 1);
         if (viewsSelected.isEvolutionCalculator())

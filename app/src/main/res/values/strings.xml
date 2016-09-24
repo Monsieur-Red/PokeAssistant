@@ -2,6 +2,11 @@
     <string name="app_name" translatable="false">Pika Assistant</string>
     <string name="msg_permission">You must enable the permission \"Draw over other apps\" for Poke Assistant in order to run.\n\nSelect Poke Assistant Application then permit drawing over other apps.\n\nEnjoy!</string>
 
+    <!-- AdMob ad unit IDs -->
+    <string name="ad_app_id" translatable="false">ca-app-pub-6260347260794661~2911009432</string>
+    <string name="banner_ad_unit_id_testing" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-6260347260794661/7341209038</string>
+
     <!-- SharedPreferences -->
     <string name="first_run" translatable="false">first run</string>
     <string name="sp_key" translatable="false">trainer lvl</string>

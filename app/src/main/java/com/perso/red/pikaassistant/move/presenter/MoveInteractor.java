@@ -1,7 +1,6 @@
 package com.perso.red.pikaassistant.move.presenter;
 
-import android.content.res.AssetManager;
-
+import com.perso.red.pikaassistant.models.ModelManager;
 import com.perso.red.pikaassistant.models.Pokemon;
 import com.perso.red.pikaassistant.models.PokemonJson;
 
@@ -11,16 +10,14 @@ import com.perso.red.pikaassistant.models.PokemonJson;
 
 public class MoveInteractor {
 
-    private PokemonJson         pokemonJson;
+    private PokemonJson     pokemonJson;
 
-    public MoveInteractor(AssetManager assetManager) {
-        pokemonJson = new PokemonJson(assetManager);
+    public MoveInteractor(ModelManager modelManager) {
+        pokemonJson = modelManager.getPokemonJson();
     }
 
     public void getMoveSets(int id, IOnMoveFinishedListener listener) {
-        Pokemon pokemon = pokemonJson.getPokemons().get(id);
-
-        if (pokemon != null)
-            listener.onSuccessGetMoveSets(pokemon.getMoves1(), pokemon.getMoves2());
+        Pokemon     pokemon = pokemonJson.getPokemons().get(id);
+        listener.onSuccessGetMoveSets(pokemon.getMoves1(), pokemon.getMoves2());
     }
 }

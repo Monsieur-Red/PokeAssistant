@@ -3,7 +3,7 @@
     <string name="msg_permission">Vous devez activer la permission \"Se superposer aux autres applications\" de Poke Assistant pour qu\'elle puisse fonctionner.\n\nSélectionne l\'application Poke Assistant et autorise la superposition sur autres applications.\n\nEnjoy!</string>
 
     <!-- Main -->
-    <string name="start">Demarrer</string>
+    <string name="start">Démarrer</string>
     <string name="auto_launch">Lancer l\'icône flottante au démarrage de l\'app</string>
 
     <!-- Memu -->

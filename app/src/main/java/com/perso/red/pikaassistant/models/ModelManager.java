@@ -17,8 +17,8 @@ public class ModelManager {
     private List<Pokemon>   pokemonWithEvolution;
     private List<String>    pokemonNamesWithEvolution;
 
-    private CpmPokemon                  cpmPokemon;
-    private MaxCpPokemon                maxCpPokemon;
+    private CpmPokemon      cpmPokemon;
+    private MaxCpPokemon    maxCpPokemon;
 
     public ModelManager(AssetManager assetManager) {
         pokemonJson = new PokemonJson(assetManager);
@@ -26,6 +26,7 @@ public class ModelManager {
         initPokemonWithEvolution();
         cpmPokemon = new CpmPokemon(assetManager);
         maxCpPokemon = new MaxCpPokemon(assetManager);
+        setPokemonJsonMoveSets(assetManager);
     }
 
     private void initPokemonWithEvolution() {
@@ -39,6 +40,24 @@ public class ModelManager {
             if (pokemon.getCandy() != 0) {
                 pokemonWithEvolution.add(pokemon);
                 pokemonNamesWithEvolution.add(pokemonNames.get(i));
+            }
+        }
+    }
+
+    private void setPokemonJsonMoveSets(AssetManager assetManager) {
+        MoveSetsJson moveSetsJson = new MoveSetsJson(assetManager);
+
+        for (Pokemon pokemon : pokemonJson.getPokemons()) {
+            for (Move move1 : pokemon.getMoves1()) {
+                String  move = move1.getName();
+                move = move.replace("FAST", "").replace("_", "");
+                move1.setName(moveSetsJson.getMove(move));
+            }
+
+            for (Move move2 : pokemon.getMoves2()) {
+                String  move = move2.getName();
+                move = move.replace("_", "");
+                move2.setName(moveSetsJson.getMove(move));
             }
         }
     }

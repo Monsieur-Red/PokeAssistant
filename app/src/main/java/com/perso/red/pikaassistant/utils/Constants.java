@@ -15,6 +15,7 @@ public class Constants {
     public static final String FILE_DUST_TO_LVL = "dust_to_level.json";
     public static final String FILE_CPM_POKEMON = "pokemon_cpm.json";
     public static final String FILE_MAX_CP_POKEMON = "pokemon_max_cp.json";
+    public static final String FILE_MOVE_SETS = "move_sets.json";
     public static final String FILE_EGG_G1 = "file:///android_asset/eggs_g1.png";
     public static final String FILE_EGG_G2 = "file:///android_asset/eggs_g2.jpg";
     public static final String FILE_BUDDIES_1_KM = "file:///android_asset/buddies_1km.png";

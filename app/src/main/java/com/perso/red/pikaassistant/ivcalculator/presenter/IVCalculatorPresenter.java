@@ -9,6 +9,7 @@ import com.perso.red.pikaassistant.R;
 import com.perso.red.pikaassistant.mainUi.MainUiPresenter;
 import com.perso.red.pikaassistant.ivcalculator.view.IVCalculatorView;
 import com.perso.red.pikaassistant.ivdetails.presenter.IVDetailsPresenter;
+import com.perso.red.pikaassistant.models.ModelManager;
 import com.perso.red.pikaassistant.move.presenter.MovePresenter;
 import com.perso.red.pikaassistant.utils.Tools;
 
@@ -27,12 +28,12 @@ public class IVCalculatorPresenter implements IIVCalculatorPresenter, IOnIVCalcu
     private IVDetailsPresenter  ivDetailsPresenter;
     private MovePresenter       movePresenter;
 
-    public IVCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, WindowManager windowManager, boolean showMenuBtn) {
+    public IVCalculatorPresenter(MainUiPresenter mainUiPresenter, View layout, WindowManager windowManager, ModelManager modelManager, boolean showMenuBtn) {
         this.mainUiPresenter = mainUiPresenter;
         interactor = new IVCalculatorInteractor(layout.getContext().getAssets());
         view = new IVCalculatorView(layout, windowManager, this, showMenuBtn);
         ivDetailsPresenter = new IVDetailsPresenter(layout.findViewById(R.id.view_iv_details), this, interactor.getIvCalculatorModel());
-        movePresenter = new MovePresenter(layout.findViewById(R.id.view_moves));
+        movePresenter = new MovePresenter(layout.findViewById(R.id.view_moves), modelManager);
         checkTrainerLvlSave(layout.getContext());
     }
 

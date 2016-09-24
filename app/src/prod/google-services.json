@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "496078328418",
+    "firebase_url": "https://pikaassistant.firebaseio.com",
+    "project_id": "pikaassistant",
+    "storage_bucket": "pikaassistant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496078328418:android:7499af65f08f01cb",
+        "android_client_info": {
+          "package_name": "com.perso.red.pikaassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496078328418-v85dofnjtn7vfb0jdh6nq4e2q7ml58lg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6HxCjgo0w113HqYea851NfFTK3PoHyrQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

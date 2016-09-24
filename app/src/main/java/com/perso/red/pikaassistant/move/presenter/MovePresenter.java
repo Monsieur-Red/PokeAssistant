@@ -3,6 +3,7 @@ package com.perso.red.pikaassistant.move.presenter;
 import android.view.View;
 
 import com.perso.red.pikaassistant.R;
+import com.perso.red.pikaassistant.models.ModelManager;
 import com.perso.red.pikaassistant.models.Move;
 import com.perso.red.pikaassistant.move.view.MoveView;
 
@@ -17,9 +18,9 @@ public class MovePresenter implements IMovePresenter, IOnMoveFinishedListener {
     private MoveView        view;
     private MoveInteractor  interactor;
 
-    public MovePresenter(View layout) {
+    public MovePresenter(View layout, ModelManager modelManager) {
         view = new MoveView(layout);
-        interactor = new MoveInteractor(layout.getContext().getAssets());
+        interactor = new MoveInteractor(modelManager);
     }
 
     @Override

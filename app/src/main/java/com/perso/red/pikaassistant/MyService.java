@@ -49,7 +49,6 @@ public class MyService extends Service implements FloatingViewListener {
         windowManager.getDefaultDisplay().getMetrics(metrics);
         final ImageView bubbleView = new ImageView(this);
         bubbleView.setImageResource(R.drawable.icon);
-
         bubbleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
